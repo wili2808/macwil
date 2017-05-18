@@ -1,0 +1,76 @@
+body{
+    background-color: ;
+    font-family: serif sans-serif monospace;
+    font-size: 17px;
+}
+
+@font-face{
+    font-family: vicentia;
+    src: url(base_url assets/fonts/vicentia.ttf),
+    url(base_url assets/fonts/vicentia.otf),
+    url(base_url assets/fonts/vicentia.eot);
+}
+
+#cabecera{
+    font-family: vicentia;
+    font-size: 120px;
+    text-align: center;
+}
+
+.container{
+    border: 2px solid black;
+    background-color: #E0F2F7;
+}
+
+@media only screen and (max-width: 766px){
+    #btn_sesion{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1200px){
+    .social{
+        display: none;
+    }
+}
+
+#form_consulta{
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 5px double black;
+}
+
+#nosotros{
+    font-size: 17px;
+}
+
+
+/* CSS Redes Sociales */
+    .social{
+        list-style: none;
+        margin-top: 50px;
+        padding-left: 5px;
+    }
+    .social li a{
+        display: inline-block;
+        text-decoration: none;
+        padding: 10px 15px;
+        font-size: 25px;
+        -webkit-transition: 500ms ease;
+        -o-transition: 500ms ease;
+        transition: 500ms ease;
+    }
+    .social li a:hover{
+        color: darkblue;
+        padding-left: 6px;
+    }
+/*Fin CSS Redes Sociales*/
+
+
+.tabs_productos{
+    background-colorrrrrrrrrrrrr: #4CA085;
+}
+#tab_productos li a{
+    color: black;
+}
