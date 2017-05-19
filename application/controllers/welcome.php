@@ -23,6 +23,7 @@ class Welcome extends CI_Controller {
 		parent::__construct();
 	}
     
+    //Funcion que se ejecuta por defecto ---> index
 	public function index()
 	{
         $data = array('titulo' => 'Bienvenidos');
@@ -32,9 +33,48 @@ class Welcome extends CI_Controller {
         $this->load->view('front/partes/footer_views');
 	}
     
+    //Funciones de carga de vistas de productos y servicios...
     public function uniformes()
 	{
         $data = array('titulo' => 'Uniformes Escolares');
+		$this->load->view('front/partes/head_views',$data);
+        $this->load->view('front/partes/cabecera_views');
+        $this->load->view('front/partes/footer_views');
+	}
+    public function prendas()
+	{
+		$data = array('titulo' => 'Prendas en General');
+		$this->load->view('front/partes/head_views',$data);
+        $this->load->view('front/partes/cabecera_views');
+        $this->load->view('front/partes/footer_views');
+	}
+    public function serigrafia()
+	{
+		$data = array('titulo' => 'Serigrafia');
+		$this->load->view('front/partes/head_views',$data);
+        $this->load->view('front/partes/cabecera_views');
+        $this->load->view('front/partes/footer_views');
+	}
+    public function bordados()
+	{
+		$data = array('titulo' => 'Bordados');
+		$this->load->view('front/partes/head_views',$data);
+        $this->load->view('front/partes/cabecera_views');
+        $this->load->view('front/partes/footer_views');
+	}
+    public function sublimaciones()
+	{
+		$data = array('titulo' => 'Sublimacion');
+		$this->load->view('front/partes/head_views',$data);
+        $this->load->view('front/partes/cabecera_views');
+        $this->load->view('front/partes/footer_views');
+	}
+    //Fin de funciones de carga de vistas de productos y servicios...
+    
+    
+    public function login_exitoso()
+	{
+        $data = array('titulo' => 'Logeado');
 		$this->load->view('front/partes/head_views',$data);
         $this->load->view('front/partes/cabecera_views');
         $this->load->view('front/partes/footer_views');

@@ -8,7 +8,7 @@ class Login_controller extends CI_Controller {
     
 	public function index()
 	{
-		$data = array('titulo' => 'Sesion');
+		$data = array('titulo' => 'Acceso');
 		$this->load->view('front/partes/head_views',$data);
         $this->load->view('front/partes/cabecera_views');
         $this->load->view('front/login_views');

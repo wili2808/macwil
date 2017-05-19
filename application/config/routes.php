@@ -38,20 +38,25 @@
 |
 */
 
+// Ruta de inicio por defecto //
 $route['default_controller'] = "welcome";
 
-$route['uniformes'] = "uniformes_controller";
-$route['prendas'] = "prendas_controller";
-$route['serigrafia'] = "serigrafia_controller";
-$route['sublimacion'] = "sublimacion_controller";
-$route['bordados'] = "bordados_controller";
+// Rutas para views de Productos y Servicios //
+$route['uniformes']   = "welcome/uniformes";
+$route['prendas']     = "welcome/prendas";
+$route['serigrafia']  = "welcome/serigrafia";
+$route['sublimacion'] = "welcome/sublimaciones";
+$route['bordados']    = "welcome/bordados";
 
-$route['consultas'] = "consultas_controller";
+//Rutas para manejo de Logeo //
+$route['login']           = "login_controller";
+$route['verificar_login'] = "back/verifico_login_controller";
 
-$route['comercializacion'] = "comercializacion_controller";
 
-$route['login'] = "login_controller";
 
+
+$route['consultas'] = "front/consultas_controller";
+$route['comercializacion'] = "front/comercializacion_controller";
 $route['registro'] = "registro_controller";
 
 $route['404_override'] = '';
