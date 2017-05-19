@@ -50,7 +50,7 @@ $route['consultas'] = "consultas_controller";
 
 $route['comercializacion'] = "comercializacion_controller";
 
-$route['sesion'] = "sesion_controller";
+$route['login'] = "login_controller";
 
 $route['registro'] = "registro_controller";
 

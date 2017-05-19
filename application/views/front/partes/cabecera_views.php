@@ -12,7 +12,7 @@
                 <span class="icon-bar"></span>
             </button>     
             <a href="<?php echo base_url();?>" class="navbar-brand">MAC-WIL</a>
-            <a href="<?php echo base_url('sesion');?>" class="btn btn-link navbar-toggle collapsed">Ingresá/Registrate</a>
+            <a href="<?php echo base_url('login');?>" class="btn btn-link navbar-toggle collapsed">Ingresá/Registrate</a>
         </div>  
         <div class="collapse navbar-collapse" id="navbar-1">
             <ul class="nav navbar-nav">
@@ -32,7 +32,7 @@
             </ul>
             
             <form class="navbar-form navbar-right" role="search">
-                <a id="btn_sesion" href="<?php echo base_url('sesion');?>" class="btn btn-default">Ingresá/Registrate</a>
+                <a id="btn_sesion" href="<?php echo base_url('login');?>" class="btn btn-default">Ingresá/Registrate</a>
                 <div class="form-group">
                     <input type="search" class="form-control" placeholder="Buscar">
                 </div> 
