@@ -39,25 +39,28 @@
 */
 
 // Ruta de inicio por defecto //
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "home";
 
 // Rutas para views de Productos y Servicios //
-$route['uniformes']   = "welcome/uniformes";
-$route['prendas']     = "welcome/prendas";
-$route['serigrafia']  = "welcome/serigrafia";
-$route['sublimacion'] = "welcome/sublimaciones";
-$route['bordados']    = "welcome/bordados";
+$route['uniformes']   = "home/uniformes";
+$route['prendas']     = "home/prendas";
+$route['serigrafia']  = "home/serigrafia";
+$route['sublimacion'] = "home/sublimaciones";
+$route['bordados']    = "home/bordados";
 
-//Rutas para manejo de Logeo //
-$route['login']           = "login_controller";
-$route['verificar_login'] = "back/verifico_login_controller";
+//Rutas para manejo de Usuarios //
+$route['login']              = "usuario_controller";
+$route['verificar_login']    = "usuario_controller/verifico_login";
+$route['registro']           = "usuario_controller/registro";
+$route['verificar_registro'] = "usuario_controller/verifico_registro";
+$route['perfil/(:num)']      = 'usuario_controller/perfil/$1';
 
+$route['salir']              = 'usuario_controller/logout';
 
 
 
 $route['consultas'] = "front/consultas_controller";
 $route['comercializacion'] = "front/comercializacion_controller";
-$route['registro'] = "registro_controller";
 
 $route['404_override'] = '';
 

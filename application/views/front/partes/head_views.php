@@ -12,4 +12,3 @@
         <link rel="stylesheet" href="<?php echo base_url ("assets/fuentes.css");?>"/>
     </head>
     <body>
-        <div class="container"> <!--- Abro div del container principal --->

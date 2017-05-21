@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Home extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -29,7 +29,7 @@ class Welcome extends CI_Controller {
         $data = array('titulo' => 'Bienvenidos');
 		$this->load->view('front/partes/head_views',$data);
         $this->load->view('front/partes/cabecera_views');
-        $this->load->view('front/index_content_views');
+        $this->load->view('front/home_content_views');
         $this->load->view('front/partes/footer_views');
 	}
     
@@ -70,15 +70,6 @@ class Welcome extends CI_Controller {
         $this->load->view('front/partes/footer_views');
 	}
     //Fin de funciones de carga de vistas de productos y servicios...
-    
-    
-    public function login_exitoso()
-	{
-        $data = array('titulo' => 'Logeado');
-		$this->load->view('front/partes/head_views',$data);
-        $this->load->view('front/partes/cabecera_views');
-        $this->load->view('front/partes/footer_views');
-	}
 }
 
 /* End of file welcome.php */
