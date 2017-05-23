@@ -27,47 +27,47 @@ class Home extends CI_Controller {
 	public function index()
 	{
         $data = array('titulo' => 'Bienvenidos');
-		$this->load->view('front/partes/head_views',$data);
-        $this->load->view('front/partes/cabecera_views');
-        $this->load->view('front/home_content_views');
-        $this->load->view('front/partes/footer_views');
+		$this->load->view('partes/head_views',$data);
+        $this->load->view('partes/cabecera_views');
+        $this->load->view('home_content_views');
+        $this->load->view('partes/footer_views');
 	}
     
     //Funciones de carga de vistas de productos y servicios...
     public function uniformes()
 	{
         $data = array('titulo' => 'Uniformes Escolares');
-		$this->load->view('front/partes/head_views',$data);
-        $this->load->view('front/partes/cabecera_views');
-        $this->load->view('front/partes/footer_views');
+		$this->load->view('partes/head_views',$data);
+        $this->load->view('partes/cabecera_views');
+        $this->load->view('partes/footer_views');
 	}
     public function prendas()
 	{
 		$data = array('titulo' => 'Prendas en General');
-		$this->load->view('front/partes/head_views',$data);
-        $this->load->view('front/partes/cabecera_views');
-        $this->load->view('front/partes/footer_views');
+		$this->load->view('partes/head_views',$data);
+        $this->load->view('partes/cabecera_views');
+        $this->load->view('partes/footer_views');
 	}
     public function serigrafia()
 	{
 		$data = array('titulo' => 'Serigrafia');
-		$this->load->view('front/partes/head_views',$data);
-        $this->load->view('front/partes/cabecera_views');
-        $this->load->view('front/partes/footer_views');
+		$this->load->view('partes/head_views',$data);
+        $this->load->view('partes/cabecera_views');
+        $this->load->view('partes/footer_views');
 	}
     public function bordados()
 	{
 		$data = array('titulo' => 'Bordados');
-		$this->load->view('front/partes/head_views',$data);
-        $this->load->view('front/partes/cabecera_views');
-        $this->load->view('front/partes/footer_views');
+		$this->load->view('partes/head_views',$data);
+        $this->load->view('partes/cabecera_views');
+        $this->load->view('partes/footer_views');
 	}
     public function sublimaciones()
 	{
 		$data = array('titulo' => 'Sublimacion');
-		$this->load->view('front/partes/head_views',$data);
-        $this->load->view('front/partes/cabecera_views');
-        $this->load->view('front/partes/footer_views');
+		$this->load->view('partes/head_views',$data);
+        $this->load->view('partes/cabecera_views');
+        $this->load->view('partes/footer_views');
 	}
     //Fin de funciones de carga de vistas de productos y servicios...
 }

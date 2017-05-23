@@ -9,9 +9,9 @@ class Uniformes_controller extends CI_Controller {
 	public function index()
 	{
 		$data = array('titulo' => 'Unifores Escolares');
-		$this->load->view('front/partes/head_views',$data);
-        $this->load->view('front/partes/cabecera_views');
-        $this->load->view('front/partes/footer_views');
+		$this->load->view('partes/head_views',$data);
+        $this->load->view('partes/cabecera_views');
+        $this->load->view('partes/footer_views');
 	}
 }
 

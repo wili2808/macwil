@@ -9,29 +9,17 @@
             $this ->load->model('usuario_model');	
         }
         
+        //funcion que se ejecuta por defecto ----> Carga las vistas para Logearse...
         function index()
         {
             $data = array('titulo' => 'Acceso');
-            $this->load->view('front/partes/head_views',$data);
-            $this->load->view('front/partes/cabecera_views');
-            $this->load->view('front/login_views');
-            $this->load->view('front/partes/footer_views');
+            $this->load->view('partes/head_views',$data);
+            $this->load->view('partes/cabecera_views');
+            $this->load->view('login_views');
+            $this->load->view('partes/footer_views');
         }
         
-        //Función que verifica si el usuario esta logueado
-        private function _veri_log()
-        {
-            if ($this->session->userdata('logged_in'))
-            {
-                return TRUE;
-            } 
-            else 
-            {
-                return FALSE;
-            }
-        }
-        
-        //Función que verifica los datos del login
+        //Función que verifica los datos cargados en el Login...
         function verifico_login()
         {
             // reglas de validación
@@ -42,27 +30,25 @@
 			$this->form_validation->set_message('_valid_login', 'El usuario o contraseña son incorrectos');
 			//forma en que se muestra fallo de validacion
             $this -> form_validation -> set_error_delimiters('<div class="alert alert-danger">', '</div>');
-			
+            //si falla la validadcion carga el login con titulo de Error...
 			if ($this->form_validation->run() == FALSE)
 			{
 				$data = array('titulo' => 'Error de Logeo');
-                $this->load->view('front/partes/head_views',$data);
-                $this->load->view('front/partes/cabecera_views');
-                $this->load->view('front/login_views');
-                $this->load->view('front/partes/footer_views');
+                $this->load->view('partes/head_views',$data);
+                $this->load->view('partes/cabecera_views');
+                $this->load->view('login_views');
+                $this->load->view('partes/footer_views');
 			}
 			else
             {
 				$usuario = $this->input->post('usuario');
-                
                 //recupero el usuario mediante el nombre de usuario
                 $user = $this->usuario_model->get_by_username($usuario);
-                
 				$data_user = $array = array('username'=> $usuario, 'logued_in' => TRUE);
-				
-				// asigno dos datos a la sesión --> (username y logued_in)
-				$this->session->set_userdata($data_user); 
-				
+				//asigno dos datos a la sesión --> (username y logued_in)
+				$this->session->set_userdata($data_user);
+                
+                
                 //redirigimos a la página de perfil
 				redirect('perfil/'.$user->id);
 			}
@@ -90,8 +76,7 @@
             {
 				redirect('home');
 			}
-			
-		} // fin del método valid_login_ajax
+		}
 		
 		function logout()
         {
@@ -104,10 +89,7 @@
         public function registro()
         {
             $data = array('titulo' => 'Registro');
-            $this->load->view('front/partes/head_views',$data);
-            $this->load->view('front/partes/cabecera_views');
-            $this->load->view('front/registro_views');   
-            $this->load->view('front/partes/footer_views');
+            $this->load->multiple_views(['partes/head_views','partes/cabecera_views','registro_views','partes/footer_views'],$data);
         }
 		
         public function verifico_registro()
@@ -139,11 +121,8 @@
 			if ($this->form_validation->run() == FALSE)
 			{
 				//Muestra la página de registro con el título de error
-				$data = array('titulo' => 'Error de Registro');					
-				$this->load->view('front/partes/head_views',$data);
-                $this->load->view('front/partes/cabecera_views');
-                $this->load->view('front/registro_views');   
-                $this->load->view('front/partes/footer_views');
+				$data = array('titulo' => 'Error de Registro');
+                $this->load->multiple_views(['partes/head_views','partes/cabecera_views','registro_views','partes/footer_views'],$data);
 			}
 			//Pasa la validacion
 			else
@@ -166,11 +145,6 @@
 			$data['titulo'] = 'Perfil de '.$user->nombre; 
 			$data['user'] = $user->nombre;
 			//Cargo las vistas
-			$this->load->multiple_views(['front/partes/head_views','front/partes/cabecera_views','front/perfil_views','front/partes/footer_views'],$data);
-            //$title = array('titulo' => 'Mi Perfil');
-            //$this->load->view('front/partes/head_views',$title);
-            //$this->load->view('front/partes/cabecera_views',$data);
-            //$this->load->view('front/perfil_views');
-            //$this->load->view('front/partes/footer_views');
+			$this->load->multiple_views(['partes/head_views','partes/cabecera_views','perfil_usuario_views','partes/footer_views'],$data);
 		}
 	}

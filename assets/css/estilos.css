@@ -4,6 +4,11 @@ body{
     font-size: 17px;
 }
 
+footer a{
+    text-decoration: none;
+    color: black;
+}
+
 @font-face{
     font-family: vicentia;
     src: url(base_url assets/fonts/vicentia.ttf),
@@ -35,11 +40,12 @@ body{
     }
 }
 
-#form_consulta{
+.formulario{
     padding: 15px;
     margin-top: 15px;
     margin-bottom: 15px;
     border: 5px double black;
+    background-color: #D0F4FF;
 }
 
 #nosotros{

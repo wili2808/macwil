@@ -59,8 +59,8 @@ $route['salir']              = 'usuario_controller/logout';
 
 
 
-$route['consultas'] = "front/consultas_controller";
-$route['comercializacion'] = "front/comercializacion_controller";
+$route['consultas'] = "consultas_controller";
+$route['comercializacion'] = "comercializacion_controller";
 
 $route['404_override'] = '';
 

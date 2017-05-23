@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
+        <div class="formulario col-sm-12 col-md-4 col-md-offset-4">
             <h1 class="text-center login-title">Inicie sesión para continuar</h1>
             <?php echo validation_errors(); ?>
             <div class="account-wall">
