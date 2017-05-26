@@ -34,11 +34,13 @@
                 
                 <form class="navbar-form navbar-right" role="search">
                     <!-- Verifico si el usuario no está logueado, entonces muestra los enlaces para ingresar o registrarse -->
-                    <?php if(!isset($_session['logued_in'])){ ?>
+                    <?php if(!isset($_SESSION['logued_in'])){ ?>
+                       
                         <a id="btn_sesion" href="<?php echo base_url('login');?>" class="btn btn-default">Ingresá/Registrate</a>
                     <!-- Si no, muestro la página de perfil -->
                     <?php }else{ ?>
-                        <a href="<?php echo base_url('perfil/'.$user);?>">Mi perfil</a>
+                    <li><a href="<?php echo base_url('perfil/'.$user);?>">Mi perfil</a></li>
+                    
                     <?php } ?>
                     <div class="form-group">
                         <input type="search" class="form-control" placeholder="Buscar">

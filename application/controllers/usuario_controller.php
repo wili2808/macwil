@@ -44,11 +44,10 @@
 				$usuario = $this->input->post('usuario');
                 //recupero el usuario mediante el nombre de usuario
                 $user = $this->usuario_model->get_by_username($usuario);
-				$data_user = $array = array('username'=> $usuario, 'logued_in' => TRUE);
+				$data_user = array('username'=> $usuario, 'logued_in' => TRUE);
 				//asigno dos datos a la sesión --> (username y logued_in)
 				$this->session->set_userdata($data_user);
-                
-                
+                $this->load->view('partes/cabecera_views',$user);
                 //redirigimos a la página de perfil
 				redirect('perfil/'.$user->id);
 			}
@@ -107,16 +106,7 @@
 			$this->form_validation->set_message('required','<div class="alert alert-danger">El campo %s es obligatorio</div>');
 			$this->form_validation->set_message('matches','<div class="alert alert-danger">Los contraseña ingresada no coincide</div>');
 			$pass = $this->input->post('re_password',true);
-			//Preparo los datos para guardar en la base, en caso de que pase la validacion
-			//Los datos corresponden a los nombres de mi campos de la base de datos
-			$data = array(
-				'nombre'=>$this->input->post('nombre',true),
-				'apellido'=>$this->input->post('apellido',true),
-				'usuario'=>$this->input->post('usuario',true),
-				'pass'=>base64_encode($pass),
-                'tel'=>$this->input->post('telefono',true),
-                'email'=>$this->input->post('email',true)
-			);
+			
 			//Si no pasa la validacion de datos
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -127,6 +117,16 @@
 			//Pasa la validacion
 			else
 			{
+                //Preparo los datos para guardar en la base...
+                //Los datos corresponden a los nombres de mi campos de la base de datos
+                $data = array(
+				'nombre'=>$this->input->post('nombre',true),
+				'apellido'=>$this->input->post('apellido',true),
+				'usuario'=>$this->input->post('usuario',true),
+				'pass'=>($pass),
+                'tel'=>$this->input->post('telefono',true),
+                'email'=>$this->input->post('email',true)
+                );
 				//Envio array al metodo insert para registro de datos
 				$usuario = $this->usuario_model->add_user($data);
 				$data_user = $array = array('user'=> $usuario, 'logued_in' => TRUE, 'name'=>$data['nombre']);
@@ -143,7 +143,7 @@
 			$user = $this->usuario_model->get_by_id($id);
 			//asigno a $data las variables que paso a la vista
 			$data['titulo'] = 'Perfil de '.$user->nombre; 
-			$data['user'] = $user->nombre;
+			$data['usuario'] = $user->nombre;
 			//Cargo las vistas
 			$this->load->multiple_views(['partes/head_views','partes/cabecera_views','perfil_usuario_views','partes/footer_views'],$data);
 		}
