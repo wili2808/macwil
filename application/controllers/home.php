@@ -70,6 +70,21 @@ class Home extends CI_Controller {
         $this->load->view('partes/footer_views');
 	}
     //Fin de funciones de carga de vistas de productos y servicios...
+    
+    function login()
+        {
+            $data = array('titulo' => 'Acceso');
+            $this->load->view('partes/head_views',$data);
+            $this->load->view('partes/cabecera_views');
+            $this->load->view('login_views');
+            $this->load->view('partes/footer_views');
+        }
+    
+    public function registro()
+        {
+            $data = array('titulo' => 'Registro');
+            $this->load->multiple_views(['partes/head_views','partes/cabecera_views','registro_views','partes/footer_views'],$data);
+        }
 }
 
 /* End of file welcome.php */

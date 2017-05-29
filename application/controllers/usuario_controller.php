@@ -9,15 +9,17 @@
             $this ->load->model('usuario_model');	
         }
         
-        //funcion que se ejecuta por defecto ----> Carga las vistas para Logearse...
-        function index()
-        {
-            $data = array('titulo' => 'Acceso');
-            $this->load->view('partes/head_views',$data);
-            $this->load->view('partes/cabecera_views');
-            $this->load->view('login_views');
-            $this->load->view('partes/footer_views');
-        }
+        //funcion que se ejecuta por defecto ----> Carga las vistas del Perfil de usuario...
+        function index($id)
+		{
+			//obtengo el usuario mediante su id
+			$user = $this->usuario_model->get_by_id($id);
+			//asigno a $data las variables que paso a la vista
+            $data['usuario'] = $user->nombre;
+			$data['titulo'] = 'Perfil de '.$user->nombre;
+			//Cargo las vistas
+			$this->load->multiple_views(['partes/head_views','partes/cabecera_views','perfil_usuario_views','partes/footer_views'],$data);
+		}
         
         //Función que verifica los datos cargados en el Login...
         function verifico_login()
@@ -44,12 +46,11 @@
 				$usuario = $this->input->post('usuario');
                 //recupero el usuario mediante el nombre de usuario
                 $user = $this->usuario_model->get_by_username($usuario);
-				$data_user = array('username'=> $usuario, 'logued_in' => TRUE);
+				$data_user = array('usuario'=> $usuario, 'logued_in' => TRUE);
 				//asigno dos datos a la sesión --> (username y logued_in)
 				$this->session->set_userdata($data_user);
-                $this->load->view('partes/cabecera_views',$user);
                 //redirigimos a la página de perfil
-				redirect('perfil/'.$user->id);
+				redirect('perfil/'.$id);
 			}
         }
         
@@ -75,14 +76,6 @@
             {
 				redirect('home');
 			}
-		}
-		
-		function logout()
-        {
-            //destruyo la variable de sesion
-			$this->session->sess_destroy();
-            //direcciono a la página principal
-			redirect(base_url());		
 		}
         
         public function registro()
@@ -128,23 +121,20 @@
                 'email'=>$this->input->post('email',true)
                 );
 				//Envio array al metodo insert para registro de datos
-				$usuario = $this->usuario_model->add_user($data);
-				$data_user = $array = array('user'=> $usuario, 'logued_in' => TRUE, 'name'=>$data['nombre']);
+				$user = $this->usuario_model->add_user($data);
+				$data_user = $array = array('usuario'=> $usuario, 'logued_in' => TRUE, 'name'=>$data['nombre']);
 				//asigno los datos a la sesion
 				$this->session->set_userdata($data_user); 
 				//Redirecciono a la pagina de perfil
-				redirect('perfil/'.$usuario);
+				redirect('perfil/'.$user);
 			}	
 		}
         
-        function perfil($id)
-		{
-			//obtengo el usuario mediante su id
-			$user = $this->usuario_model->get_by_id($id);
-			//asigno a $data las variables que paso a la vista
-			$data['titulo'] = 'Perfil de '.$user->nombre; 
-			$data['usuario'] = $user->nombre;
-			//Cargo las vistas
-			$this->load->multiple_views(['partes/head_views','partes/cabecera_views','perfil_usuario_views','partes/footer_views'],$data);
+        function logout()
+        {
+            //destruyo la variable de sesion
+			$this->session->sess_destroy();
+            //direcciono a la página principal
+			redirect(base_url());		
 		}
 	}

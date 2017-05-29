@@ -49,13 +49,17 @@ $route['sublimacion'] = "home/sublimaciones";
 $route['bordados']    = "home/bordados";
 
 //Rutas para manejo de Usuarios //
-$route['login']              = "usuario_controller";
+$route['login']              = "home/login";
+$route['registro']           = "home/registro";
+$route['perfil/(:num)']      = 'usuario_controller/index/$1';
 $route['verificar_login']    = "usuario_controller/verifico_login";
-$route['registro']           = "usuario_controller/registro";
 $route['verificar_registro'] = "usuario_controller/verifico_registro";
-$route['perfil/(:num)']      = 'usuario_controller/perfil/$1';
 
 $route['salir']              = 'usuario_controller/logout';
+
+//Rutas para manejo de Productos //
+$route['insertar_producto'] = "producto_controller/form_insertar_p";
+
 
 
 

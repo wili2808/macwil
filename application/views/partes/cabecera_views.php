@@ -39,7 +39,7 @@
                         <a id="btn_sesion" href="<?php echo base_url('login');?>" class="btn btn-default">Ingresá/Registrate</a>
                     <!-- Si no, muestro la página de perfil -->
                     <?php }else{ ?>
-                    <li><a href="<?php echo base_url('perfil/'.$user);?>">Mi perfil</a></li>
+                    <li><a href="<?php echo base_url('perfil/'.$id);?>">Mi perfil</a></li>
                     
                     <?php } ?>
                     <div class="form-group">
