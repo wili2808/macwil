@@ -32,21 +32,53 @@
                     </li>
                 </ul>
                 
-                <form class="navbar-form navbar-right" role="search">
-                    <!-- Verifico si el usuario no está logueado, entonces muestra los enlaces para ingresar o registrarse -->
-                    <?php if(!isset($_SESSION['logued_in'])){ ?>
-                       
-                        <a id="btn_sesion" href="<?php echo base_url('login');?>" class="btn btn-default">Ingresá/Registrate</a>
-                    <!-- Si no, muestro la página de perfil -->
-                    <?php }else{ ?>
-                    <li><a href="<?php echo base_url('perfil/'.$id);?>">Mi perfil</a></li>
-                    
-                    <?php } ?>
-                    <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Buscar">
-                    </div> 
-                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <?php if($this->session->userdata('login_ajax') != "TRUE"){ ?>
+                        <li>
+                            <a class="btn btn-default" role="button" data-toggle="modal" data-target=".forget-modal">Iniciar sesión</a>
+                        </li>
+                    <?php }else{?>
+                        <li class="dropdown" id="sesion">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido 
+                            <?= $this->session->userdata('usuario')?><b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="#"><a type="button" href="<?php echo base_url('logout_ajax') ?>" role="button">Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                    <?php }?>
+                </ul>
             </div>
         </div>
     </nav>
+    
+    <div class="modal fade forget-modal" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">Iniciar sesión</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="javascript:;" method="post" id="login-form" autocomplete="off">
+                        <div class="form-group">
+                            <label for="usuario" class="sr-only">Usuario</label>
+                            <input type="text" name="usuario" id="usuario" class="form-control" placeholder="usuario">
+                        </div>
+                        <div class="form-group">
+                            <label for="pass" class="sr-only">Contraseña</label>
+                            <input type="password" name="pass" id="pass" class="form-control" placeholder="Contraseña">
+                        </div>
+                        <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Iniciar" data-dismiss="modal">
+                    </form>
+
+                    <h3 class="text-center">No estas Registrado?</h3><br>
+                    <a href="registro" class="btn btn-lg btn-primary btn-block">Registrate acá</a>
+                </div>
+            </div> <!-- /.modal-content -->
+        </div> <!-- /.modal-dialog -->
+    </div> <!-- /.modal -->
 </div>

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="formulario col-sm-6 col-md-4 col-md-offset-4">
         <div class="well">
-            <h2 class="text-center">Ingrese sus datos para Registrarse</h1>					
+            <h2 class="text-center">Ingrese sus datos para Registrarse</h2>					
         </div>	            
         <?php echo form_open("verificar_registro", ['class' => 'form-signin', 'role' => 'form']); ?>
             <div class="form-group">

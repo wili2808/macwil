@@ -41,24 +41,32 @@
 // Ruta de inicio por defecto //
 $route['default_controller'] = "home";
 
+
+//Rutas para manejo de Usuarios - Ingreso y cierre de sesion//
+$route['login']               = "usuario_controller";
+$route['login_ajax']          = "usuario_controller/valid_login_ajax";
+$route['verificar_login']     = "usuario_controller/verifico_login";
+$route['salir']               = 'usuario_controller/logout';
+$route['logout_ajax']         = "usuario_controller/logout_ajax";
+//Rutas para manejo de Usuarios - Registro, Panel//
+$route['registro']            = "usuario_controller/registro";
+$route['verificar_registro']  = "usuario_controller/verifico_registro";
+$route['panel']               = "panel_controller";
+//Rutas para manejo de Usuarios - Lista y Modificacion de usuarios//
+$route['lista_usuarios']      = 'usuario_controller/all';
+$route['edit_usuario/(:num)'] = "usuario_controller/edit/$1";
+$route['usuario_up/(:num)']   = "usuario_controller/editar_socio/$1";
+
+
 // Rutas para views de Productos y Servicios //
 $route['uniformes']   = "home/uniformes";
 $route['prendas']     = "home/prendas";
 $route['serigrafia']  = "home/serigrafia";
 $route['sublimacion'] = "home/sublimaciones";
 $route['bordados']    = "home/bordados";
-
-//Rutas para manejo de Usuarios //
-$route['login']              = "home/login";
-$route['registro']           = "home/registro";
-$route['perfil/(:num)']      = 'usuario_controller/index/$1';
-$route['verificar_login']    = "usuario_controller/verifico_login";
-$route['verificar_registro'] = "usuario_controller/verifico_registro";
-
-$route['salir']              = 'usuario_controller/logout';
-
 //Rutas para manejo de Productos //
-$route['insertar_producto'] = "producto_controller/form_insertar_p";
+$route['insertar_producto'] = "producto_controller";
+$route['registro_producto'] = "producto_controller/insert_producto";
 
 
 

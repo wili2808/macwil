@@ -8,24 +8,13 @@
             
             $query = $this->db->get('usuarios');
             
-            if($query->num_rows() >0)
+            if($query->num_rows() == 1)
             {
-                return TRUE;
+                return $query->result();
             }
             else
             {
                 return FALSE;
-            }
-        }
-        
-        function validar_usuario_ajax($username)
-        {
-            $this->db->where('usuario', $username);
-            $query = $this->db->get('usuarios');
-            
-            if($query->num_rows() >0)
-            {
-                echo $query->num_rows();
             }
         }
         
@@ -34,7 +23,61 @@
 			$query = $this->db->get('users');
 			return $query->result();
 		}
+        
+        
+        //car -------------------------
+        function get_socios()
+        {
+            $query = $this->db->get("usuarios");
+            if($query->num_rows()>0)
+            {
+                return $query;
+            }
+            else 
+            {
+                return FALSE;
+            }
+        }
+        
+        //car -------------------------
+        function update_socios($id)
+        {
+            $query = $this->db->get_where('usuarios', array('id' => $id),1);
+            if($query->num_rows() == 1)
+            {
+                return $query;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
+        
+        //car -------------------------
+        function set_socio($id, $data){
+            $this->db->where('id', $id);
+            $query = $this->db->update('usuarios', $data);
+            if($query)
+            {
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
 		
+        //car --------------------------
+        function valid_user_ajax($usuario, $pass){
+            $query = $this->db->get_where('usuarios', array('usuario'=>$usuario,'pass'=>$pass));
+
+            if($query->num_rows() >0){
+                return $query->row();
+            }else{
+                echo 'error';
+            }
+        }
+        
 		function get_by_id($id)
 		{
 			$query = $this->db->get_where('usuarios', array('id' => $id),1);
