@@ -47,7 +47,7 @@
                                 <li class="#"><a type="button" href="<?php echo base_url('logout_ajax') ?>" role="button">Cerrar Sesión</a></li>
                             </ul>
                         </li>
-                    <?php }?>
+                    <?php } ?>
                 </ul>
             </div>
         </div>

@@ -85,6 +85,14 @@ $route['activar_producto/(:num)'] = "producto_controller/active_producto/$1";
 
 
 
+// Rutas para manejo del carrito//
+$route['add_carrito']               = "carrito_controller/add";
+$route['vaciar_carrito']               = "carrito_controller/remove/all";
+$route['sacar_producto']               = "carrito_controller/remove";
+$route['factura']               = "carrito_controller/factura_view";
+$route['actualizar_carrito']               = "carrito_controller/update_cart";
+
+
 
 $route['consultas'] = "consultas_controller";
 $route['comercializacion'] = "comercializacion_controller";

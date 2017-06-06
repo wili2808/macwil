@@ -81,3 +81,15 @@ footer a{
 #tab_productos li a{
     color: black;
 }
+
+
+
+#table{
+    font-size:15px;
+    background-color:azure;
+    width:100%;
+}
+#main_heading{
+    font-weight:bold;
+    bgcolor:#FFFFFF;
+}
