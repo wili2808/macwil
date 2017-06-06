@@ -1,6 +1,6 @@
-<div class="col-sm-10 col-md-9">
+<div class="col-sm-10 col-md-10">
 	<div class="well">
-		<h1>Todos los Socios</h1>
+		<h1>Usuarios Eliminados</h1>
 	</div>	
 	<table class="table table-bordered">
 		<thead>
@@ -11,12 +11,13 @@
 				<th>Apellido</th>
 				<th>Telefono</th>
 				<th>Email</th>
-				<th>Tipo de usuario</th>
-				<th>Editar</th>
+				<th>Tipo</th>
+				<th>Eliminado</th>
+				<th>Opciones</th>
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach($usuarios->result() as $row){ ?>
+			<?php foreach($usuario->result() as $row){ ?>
 			<tr>
 				<td><?php echo $row->id;  ?></td>
 				<td><?php echo $row->usuario;  ?></td>
@@ -25,7 +26,8 @@
 				<td><?php echo $row->tel;  ?></td>
 				<td><?php echo $row->email;  ?></td>
 				<td><?php echo $row->tipo_usuario;  ?></td>
-				<td><a href="<?php echo base_url("edit_usuario/$row->id");?>">Editar</a></td>
+				<td><?php echo $row->eliminado;  ?></td>
+				<td><a href="<?php echo base_url("activar_usuario/$row->id");?>">Activar</a></td>
 			</tr>
 			<?php } ?>
 		</tbody>

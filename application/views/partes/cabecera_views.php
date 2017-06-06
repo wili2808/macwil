@@ -43,6 +43,7 @@
                             <?= $this->session->userdata('usuario')?><b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
+                                <li class="#"><a type="button" href="<?php echo base_url('panel') ?>" role="button">Panel</a></li>
                                 <li class="#"><a type="button" href="<?php echo base_url('logout_ajax') ?>" role="button">Cerrar Sesión</a></li>
                             </ul>
                         </li>
@@ -60,19 +61,22 @@
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
                     </button>
-                    <h4 class="modal-title">Iniciar sesión</h4>
+                    <h4 class="modal-title text-center">Bienvenidos</h4>
                 </div>
                 <div class="modal-body">
                     <form role="form" action="javascript:;" method="post" id="login-form" autocomplete="off">
                         <div class="form-group">
-                            <label for="usuario" class="sr-only">Usuario</label>
+                            <label for="username"><span class="glyphicon glyphicon-user"></span> Nombre de usuario</label>
                             <input type="text" name="usuario" id="usuario" class="form-control" placeholder="usuario">
                         </div>
                         <div class="form-group">
-                            <label for="pass" class="sr-only">Contraseña</label>
+                            <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Contraseña</label>
                             <input type="password" name="pass" id="pass" class="form-control" placeholder="Contraseña">
                         </div>
-                        <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Iniciar" data-dismiss="modal">
+                        <div class="checkbox">
+                            <label><input type="checkbox" value="" checked>Recordarme</label>
+                        </div>
+                        <input type="submit" id="btn-login" class="btn btn-lg btn-primary btn-block" value="Iniciar" data-dismiss="modal">
                     </form>
 
                     <h3 class="text-center">No estas Registrado?</h3><br>

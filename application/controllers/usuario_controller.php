@@ -5,7 +5,7 @@
         public function __construct()
         {
             parent::__construct();
-            $this ->load->model('usuario_model');	
+            $this ->load->model('usuario_model');
         }
         
         //funcion que se ejecuta por defecto ----> Carga las vistas correspondientes al formulario de LOGIN...
@@ -92,7 +92,16 @@
         public function registro()
         {
             $data = array('titulo' => 'Registro');
-            $this->load->multiple_views(['partes/head_views','partes/cabecera_views','registro_views','partes/footer_views'],$data);
+            $this->load->multiple_views(['partes/head_views','partes/cabecera_views','usuario/registro_views','partes/footer_views'],$data);
+        }
+        
+        public function registro_panel()
+        {
+            $session_data = $this->session->userdata('logged_in');
+            $dat['usuario'] = $session_data['usuario'];
+            $dato['tipo_usuario'] = $this->usuario_model->get_tipos(); 
+            $tit = array('titulo' => 'Panel Administrador');
+            $this->load->multiple_views(['partes/head_views','partes/cabecera_views','panel_views','usuario/registro_panel_views','partes/footer_views'],array_merge ($dat,$tit,$dato));
         }
         
         //Función que verifica los datos cargados en el formulario de REGISTRO...
@@ -117,7 +126,7 @@
 			{
 				//Muestra la página de registro con el título de error
 				$data = array('titulo' => 'Error de Registro');
-                $this->load->multiple_views(['partes/head_views','partes/cabecera_views','registro_views','partes/footer_views'],$data);
+                $this->load->multiple_views(['partes/head_views','partes/cabecera_views','usuario/registro_views','partes/footer_views'],$data);
 			}
 			//Pasa la validacion
 			else
@@ -138,7 +147,57 @@
 				//asigno los datos a la sesion
 				$this->session->set_userdata($data_user); 
 				//Redirecciono a la pagina de perfil
-				redirect('perfil/'.$user);
+				redirect('home');
+			}	
+		}
+        
+         public function verifico_registro_panel()
+        {
+			//Genero las reglas de validacion
+			$this->form_validation->set_rules('nombre', 'Nombre', 'required');
+			$this->form_validation->set_rules('apellido', 'Apellido', 'required');
+            $this->form_validation->set_rules('usuario', 'Usuario', 'required|trim|is_unique[usuarios.usuario]');
+            $this->form_validation->set_rules('pass', 'Contraseña','required|xss_clean');
+            $this->form_validation->set_rules('telefono', 'Telefono', 'required|numeric');
+			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('tipo_usuario', 'Tipo_usuario', 'required');
+			
+			//Mensaje de error si no pasan las reglas
+			$this->form_validation->set_message('required','<div class="alert alert-danger">El campo %s es obligatorio</div>');
+			$this->form_validation->set_message('matches','<div class="alert alert-danger">Los contraseña ingresada no coincide</div>');
+			
+			//Si no pasa la validacion de datos
+			if ($this->form_validation->run() == FALSE)
+			{
+				//Muestra la página de registro con el título de error
+				$session_data = $this->session->userdata('logged_in');
+                $dat['usuario'] = $session_data['usuario'];
+                $dato['tipo_usuario'] = $this->usuario_model->get_tipos(); 
+                $tit = array('titulo' => 'Panel Administrador');
+                $this->load->multiple_views(['partes/head_views','partes/cabecera_views','panel_views','usuario/registro_panel_views','partes/footer_views'],array_merge ($dat,$tit,$dato));
+			}
+			//Pasa la validacion
+			else
+			{
+                //Preparo los datos para guardar en la base...
+                //Los datos corresponden a los nombres de mi campos de la base de datos
+                $pass = $this->input->post('pass',true);
+                $data = array(
+				'nombre'=>$this->input->post('nombre',true),
+				'apellido'=>$this->input->post('apellido',true),
+				'usuario'=>$this->input->post('usuario',true),
+				'pass'=>($pass),
+                'tel'=>$this->input->post('telefono',true),
+                'email'=>$this->input->post('email',true),
+                'tipo_usuario'=>$this->input->post('tipo_usuario',true)
+                );
+				//Envio array al metodo insert para registro de datos
+				$user = $this->usuario_model->add_user($data);
+				$data_user = array('usuario'=> $usuario, 'logued_in' => TRUE, 'name'=>$data['nombre']);
+				//asigno los datos a la sesion
+				$this->session->set_userdata($data_user); 
+				//Redirecciono a la pagina de perfil
+				redirect('lista_usuarios', 'refresh');
 			}	
 		}
         
@@ -150,12 +209,12 @@
                 $dat['usuario'] = $session_data['usuario'];
                 $tit = array('titulo' => 'Panel Administrador');
                 $data = array(
-                    'usuarios' => $this->usuario_model->get_socios()
+                    'usuarios' => $this->usuario_model->get_usuarios()
                 );
                 $this->load->view('partes/head_views',$tit);
                 $this->load->view('partes/cabecera_views');
                 $this->load->view('panel_views',$dat);
-                $this->load->view('all_usuarios_views', array_merge($dat, $data));
+                $this->load->view('usuario/all_usuarios_views', array_merge($dat, $data));
                 $this->load->view('partes/footer_views');
             }
             else
@@ -200,7 +259,7 @@
                 $this->load->view('partes/head_views',$dat);
                 $this->load->view('partes/cabecera_views');
                 $this->load->view('panel_views');
-                $this->load->view('edit_usuario_views',$data);
+                $this->load->view('usuario/edit_usuario_views',$data);
                 $this->load->view('partes/footer_views');
             }
         }
@@ -236,7 +295,7 @@
                 $data['pass'] = $pass;
                 $this->load->view('partes/head_views',$dat);
                 $this->load->view('partes/cabecera_views');
-                $this->load->view('edit_usuario_views',$data);
+                $this->load->view('usuario/edit_usuario_views',$data);
                 $this->load->view('partes/footer_views');
             }
             else
@@ -279,7 +338,55 @@
                     echo 'error';
                 }
             }
-        } // fin del método valid_login_ajax
+        }
+        
+        function remove_usuario()
+        {
+            $id = $this->uri->segment(2); 
+            $dat = array(
+                'eliminado'=>'SI'
+                );
+            $this->usuario_model->estado_usuario($id, $dat);
+            redirect('lista_usuarios', 'refresh');
+        }
+        
+        function usuarios_eliminados(){
+            if($this->_veri_log())
+            {
+                $session_data = $this->session->userdata('logged_in');
+                $dat['usuario'] = $session_data['usuario'];
+                $tit = array('titulo' => 'Panel Administrador');
+                
+                if (!$this->usuario_model->not_active_usuario())
+                {
+                    redirect('lista_usuarios', 'refresh');
+                }
+                else
+                {
+                    $usuario = array('usuario' => $this->usuario_model->not_active_usuario());
+                }
+                $this->load->view('partes/head_views',$tit);
+                $this->load->view('partes/cabecera_views');
+                $this->load->view('panel_views',$dat);
+                $this->load->view('usuario/all_usuarios_eliminados_views', array_merge($usuario));
+                $this->load->view('partes/footer_views');
+            }
+            else
+            {
+               redirect('login', 'refresh');
+            }
+        }
+        
+        function active_usuario(){
+            $id = $this->uri->segment(2);
+            
+            $data = array(
+                'eliminado'=>'NO'
+                );
+            $this->usuario_model->estado_usuario($id, $data);
+            redirect('lista_usuarios', 'refresh');
+        }
+        
         
         //Cierra sesión de ajax
         function logout_ajax()

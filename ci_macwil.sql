@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2017 a las 08:44:31
+-- Tiempo de generación: 05-06-2017 a las 09:54:08
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 7.1.1
 
@@ -34,8 +34,20 @@ CREATE TABLE `productos` (
   `stock_minimo` int(11) NOT NULL,
   `talle` int(11) NOT NULL,
   `genero` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
-  `tipo_producto` int(10) UNSIGNED NOT NULL
+  `tipo_producto` int(10) UNSIGNED NOT NULL,
+  `imagen` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  `eliminado` varchar(2) COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'NO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `nombre`, `precio`, `stock`, `stock_minimo`, `talle`, `genero`, `tipo_producto`, `imagen`, `eliminado`) VALUES
+(1, 'remera', 200.00, 10, 5, 18, 'hombre', 2, '', 'SI'),
+(4, 'Remera Negra', 200.00, 10, 2, 18, 'hombre', 1, 'uploads/botines-remeras.png', 'NO'),
+(5, 'Pollera', 150.00, 15, 5, 10, 'mujer', 2, 'uploads/03_enteriso.jpg', 'NO'),
+(6, 'Escolar', 180.00, 8, 2, 12, 'mujer', 1, 'uploads/rbk3t.jpg', 'NO');
 
 -- --------------------------------------------------------
 
@@ -48,6 +60,14 @@ CREATE TABLE `tipo_producto` (
   `descripcion` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `colegio` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_producto`
+--
+
+INSERT INTO `tipo_producto` (`id`, `descripcion`, `colegio`) VALUES
+(1, 'uniformes', NULL),
+(2, 'prendas', NULL);
 
 -- --------------------------------------------------------
 
@@ -65,7 +85,8 @@ CREATE TABLE `tipo_usuario` (
 --
 
 INSERT INTO `tipo_usuario` (`id`, `descripcion`) VALUES
-(1, 'administrador');
+(1, 'administrador'),
+(2, 'cliente');
 
 -- --------------------------------------------------------
 
@@ -82,15 +103,19 @@ CREATE TABLE `usuarios` (
   `dni` int(11) NOT NULL,
   `tel` int(11) DEFAULT NULL,
   `email` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `tipo_usuario` int(10) UNSIGNED NOT NULL
+  `tipo_usuario` int(10) UNSIGNED NOT NULL DEFAULT '2',
+  `eliminado` varchar(2) COLLATE utf8_spanish2_ci DEFAULT 'NO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `usuario`, `pass`, `apellido`, `nombre`, `dni`, `tel`, `email`, `tipo_usuario`) VALUES
-(2, 'wili', 'wili', 'Garcia', 'Wili', 37044289, 2147483647, 'wili_2808@hotmail.com', 1);
+INSERT INTO `usuarios` (`id`, `usuario`, `pass`, `apellido`, `nombre`, `dni`, `tel`, `email`, `tipo_usuario`, `eliminado`) VALUES
+(2, 'wili', 'wili', 'Garcia', 'Wili', 37044289, 2147483647, 'wili_2808@hotmail.com', 1, 'NO'),
+(7, 'juan', 'juan', 'juanpi', 'juanpi', 0, 1111, 'juan@hotmail.com.ar', 2, 'SI'),
+(9, 'wili28', 'pass', 'Garcia', 'Edgar', 0, 654, 'wili_2808@hotmail.com', 1, 'NO'),
+(10, 'manu', 'manu', 'garcia', 'manu', 0, 66666, 'manu@hotmail.com', 2, 'NO');
 
 -- --------------------------------------------------------
 
@@ -171,22 +196,22 @@ ALTER TABLE `ventas_detalle`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tipo_producto`
 --
 ALTER TABLE `tipo_producto`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
 --
 ALTER TABLE `tipo_usuario`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `ventas_cabecera`
 --

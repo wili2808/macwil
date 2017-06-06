@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-        <div class="col-sm-2 col-md-3">
+        <div class="col-sm-2 col-md-2">
             <!--------------------------- Perfil de usuario logeado -------------------------------->
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -42,14 +42,19 @@
                 <div id="collapseUsuarios" class="panel-collapse collapse">
                     <div class="panel-body">
                         <table class="table">
-                            <tr>
+                           <tr>
                                 <td>
-                                    <a href="<?php echo base_url('lista_usuarios');?>">Todos</a>
+                                    <a href="<?php echo base_url('registro_panel');?>">Registrar</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="<?php echo base_url();?>">Usuarios</a>
+                                    <a href="<?php echo base_url('lista_usuarios');?>">Activos</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo base_url('lista_eliminados');?>">Eliminados</a>
                                 </td>
                             </tr>
                         </table>
@@ -69,22 +74,27 @@
                         <table class="table">
                             <tr>
                                 <td>
-                                    <a href="<?php echo base_url('insertar_producto');?>">Agregar Producto</a>
+                                    <a href="<?php echo base_url('insertar_producto');?>">Agregar</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="<?php echo base_url();?>">Uniformes</a>
+                                    <a href="<?php echo base_url('productos');?>">Todos</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo base_url('productos_eliminados'); ?>">Eliminados</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="<?php echo base_url(); ?>">Uniformes</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <a href="<?php echo base_url(); ?>">Prendas</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="#">Disponibles</a>
                                 </td>
                             </tr>
                         </table>
