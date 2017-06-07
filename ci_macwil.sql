@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2017 a las 08:44:31
+-- Tiempo de generación: 07-06-2017 a las 10:51:50
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 7.1.1
 
@@ -34,8 +34,23 @@ CREATE TABLE `productos` (
   `stock_minimo` int(11) NOT NULL,
   `talle` int(11) NOT NULL,
   `genero` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
-  `tipo_producto` int(10) UNSIGNED NOT NULL
+  `tipo_producto` int(10) UNSIGNED NOT NULL,
+  `imagen` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  `eliminado` varchar(2) COLLATE utf8_spanish2_ci NOT NULL DEFAULT 'NO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `nombre`, `precio`, `stock`, `stock_minimo`, `talle`, `genero`, `tipo_producto`, `imagen`, `eliminado`) VALUES
+(1, 'remera', 200.00, 10, 5, 18, 'hombre', 2, '', 'SI'),
+(4, 'Remera Negra', 200.00, 10, 2, 18, 'hombre', 2, 'uploads/botines-remeras.png', 'NO'),
+(5, 'Pollera', 150.00, 15, 5, 10, 'mujer', 1, 'uploads/03_enteriso.jpg', 'NO'),
+(6, 'Escolar', 180.00, 8, 2, 12, 'mujer', 1, 'uploads/rbk3t.jpg', 'NO'),
+(7, 'Uniforme: Esc 44', 250.00, 10, 4, 16, 'mujer', 1, 'uploads/5a860b2c48593bff76fc96855ef3941f.jpg', 'NO'),
+(8, 'Buso invierno', 300.00, 15, 5, 18, 'hombre', 1, 'uploads/PANTS007.jpg', 'NO'),
+(9, 'Uniforme: Esc 54', 250.00, 10, 3, 14, 'mujer', 1, 'uploads/images.jpg', 'SI');
 
 -- --------------------------------------------------------
 
@@ -48,6 +63,14 @@ CREATE TABLE `tipo_producto` (
   `descripcion` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `colegio` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_producto`
+--
+
+INSERT INTO `tipo_producto` (`id`, `descripcion`, `colegio`) VALUES
+(1, 'uniformes', NULL),
+(2, 'prendas', NULL);
 
 -- --------------------------------------------------------
 
@@ -65,7 +88,8 @@ CREATE TABLE `tipo_usuario` (
 --
 
 INSERT INTO `tipo_usuario` (`id`, `descripcion`) VALUES
-(1, 'administrador');
+(1, 'administrador'),
+(2, 'cliente');
 
 -- --------------------------------------------------------
 
@@ -82,15 +106,19 @@ CREATE TABLE `usuarios` (
   `dni` int(11) NOT NULL,
   `tel` int(11) DEFAULT NULL,
   `email` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `tipo_usuario` int(10) UNSIGNED NOT NULL
+  `tipo_usuario` int(10) UNSIGNED NOT NULL DEFAULT '2',
+  `eliminado` varchar(2) COLLATE utf8_spanish2_ci DEFAULT 'NO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `usuario`, `pass`, `apellido`, `nombre`, `dni`, `tel`, `email`, `tipo_usuario`) VALUES
-(2, 'wili', 'wili', 'Garcia', 'Wili', 37044289, 2147483647, 'wili_2808@hotmail.com', 1);
+INSERT INTO `usuarios` (`id`, `usuario`, `pass`, `apellido`, `nombre`, `dni`, `tel`, `email`, `tipo_usuario`, `eliminado`) VALUES
+(2, 'wili', 'wili', 'Garcia', 'Wili', 37044289, 2147483647, 'wili_2808@hotmail.com', 1, 'NO'),
+(7, 'juan', 'juan', 'juanpi', 'juanpi', 0, 1111, 'juan@hotmail.com.ar', 2, 'SI'),
+(9, 'wili28', 'pass', 'Garcia', 'Edgar', 0, 654, 'wili_2808@hotmail.com', 1, 'NO'),
+(10, 'manu', 'manu', 'garcia', 'manu', 0, 66666, 'manu@hotmail.com', 2, 'NO');
 
 -- --------------------------------------------------------
 
@@ -105,6 +133,15 @@ CREATE TABLE `ventas_cabecera` (
   `precio_total` double(6,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `ventas_cabecera`
+--
+
+INSERT INTO `ventas_cabecera` (`id`, `fecha`, `usuario_id`, `precio_total`) VALUES
+(1, '2017-06-06', 2, 400.00),
+(2, '2017-06-06', 2, 150.00),
+(3, '2017-06-06', 2, 150.00);
+
 -- --------------------------------------------------------
 
 --
@@ -115,8 +152,19 @@ CREATE TABLE `ventas_detalle` (
   `id` int(10) UNSIGNED NOT NULL,
   `venta_id` int(10) UNSIGNED NOT NULL,
   `producto_id` int(10) UNSIGNED NOT NULL,
-  `cantidad` int(11) NOT NULL
+  `cantidad` int(11) NOT NULL,
+  `sub_total` double(6,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `ventas_detalle`
+--
+
+INSERT INTO `ventas_detalle` (`id`, `venta_id`, `producto_id`, `cantidad`, `sub_total`) VALUES
+(1, 1, 5, 1, 150.00),
+(2, 1, 7, 1, 250.00),
+(3, 2, 5, 1, 150.00),
+(4, 3, 5, 1, 150.00);
 
 --
 -- Índices para tablas volcadas
@@ -171,32 +219,32 @@ ALTER TABLE `ventas_detalle`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `tipo_producto`
 --
 ALTER TABLE `tipo_producto`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
 --
 ALTER TABLE `tipo_usuario`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `ventas_cabecera`
 --
 ALTER TABLE `ventas_cabecera`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `ventas_detalle`
 --
 ALTER TABLE `ventas_detalle`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Restricciones para tablas volcadas
 --

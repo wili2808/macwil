@@ -21,6 +21,9 @@ class Home extends CI_Controller {
     //creamos el constructor
 	public function __construct(){
 		parent::__construct();
+        $this ->load->model('producto_model');
+        $this ->load->model('carrito_model');
+        $this->load->library('cart');
 	}
     
     //Funcion que se ejecuta por defecto ---> index
@@ -37,15 +40,23 @@ class Home extends CI_Controller {
     public function uniformes()
 	{
         $data = array('titulo' => 'Uniformes Escolares');
+        $dato = array('producto' => $this->producto_model->get_producto_uniformes());
+        
 		$this->load->view('partes/head_views',$data);
         $this->load->view('partes/cabecera_views');
+        $this->load->view('carrito_views');
+        $this->load->view('producto/uniformes_views',$dato);
         $this->load->view('partes/footer_views');
 	}
     public function prendas()
 	{
 		$data = array('titulo' => 'Prendas en General');
+        $dato = array('producto' => $this->producto_model->get_producto_prendas());
+        
 		$this->load->view('partes/head_views',$data);
         $this->load->view('partes/cabecera_views');
+        $this->load->view('carrito_views');
+        $this->load->view('producto/prendas_views',$dato);
         $this->load->view('partes/footer_views');
 	}
     public function serigrafia()

@@ -1,13 +1,30 @@
 body{
-    background-color: ;
+    background-image: url(base_url assets/img/fondos-de-pantalla-azul-infinito.jpg);
+    background-size: 50%;
     font-family: serif sans-serif monospace;
     font-size: 17px;
 }
 
-footer a{
-    text-decoration: none;
-    color: black;
+
+#footer{
+    background-color: #333;
+    margin-top: 10px;
 }
+#footer p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+footer ul{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+footer a{
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    color: #08BBB7;
+}
+
 
 @font-face{
     font-family: vicentia;
@@ -80,4 +97,49 @@ footer a{
 }
 #tab_productos li a{
     color: black;
+}
+
+
+
+/* CSS Carrito y productos */
+
+.head_titulo{
+    background-color: cornflowerblue;
+}
+
+#table{
+    font-size:15px;
+    background-color:azure;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Raleway', sans-serif;
+}
+
+h3{
+font-family: 'Raleway', sans-serif;
+margin-top: 10px;
+margin-bottom: 10px;
+color:#FFF;
+}
+
+div#text {
+color: #08BBB7;
+font-family: 'Raleway', sans-serif;
+}
+
+/*Fin CSS Redes Sociales*/
+
+.thumbnail{
+    border: 1px solid black;
+}
+
+#galeria_productos{
+    margin-top: 10px;
+}
+
+
+
+#main_heading{
+    font-weight:bold;
+    bgcolor:#FFFFFF;
 }

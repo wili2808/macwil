@@ -35,6 +35,7 @@ class Panel_controller extends CI_Controller {
             $this->load->view('partes/head_views',$data);
             $this->load->view('partes/cabecera_views');
             $this->load->view('panel_views',$data);
+            $this->load->view('datos_perfil_views');
             $this->load->view('partes/footer_views');
         }
         else
