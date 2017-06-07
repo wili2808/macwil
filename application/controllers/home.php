@@ -44,6 +44,7 @@ class Home extends CI_Controller {
         
 		$this->load->view('partes/head_views',$data);
         $this->load->view('partes/cabecera_views');
+        $this->load->view('carrito_views');
         $this->load->view('producto/uniformes_views',$dato);
         $this->load->view('partes/footer_views');
 	}
@@ -54,6 +55,7 @@ class Home extends CI_Controller {
         
 		$this->load->view('partes/head_views',$data);
         $this->load->view('partes/cabecera_views');
+        $this->load->view('carrito_views');
         $this->load->view('producto/prendas_views',$dato);
         $this->load->view('partes/footer_views');
 	}

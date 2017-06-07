@@ -19,11 +19,6 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="<?php echo base_url();?>">Carrito</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <a href="<?php echo base_url('salir');?>">Cerrar Sesión</a>
                                 </td>
                             </tr>
@@ -79,7 +74,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="<?php echo base_url('productos');?>">Todos</a>
+                                    <a href="<?php echo base_url('productos');?>">Activos</a>
                                 </td>
                             </tr>
                             <tr>
@@ -89,12 +84,12 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="<?php echo base_url(); ?>">Uniformes</a>
+                                    <a href="<?php echo base_url('productos_uniformes'); ?>">Uniformes</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="<?php echo base_url(); ?>">Prendas</a>
+                                    <a href="<?php echo base_url('productos_prendas'); ?>">Prendas</a>
                                 </td>
                             </tr>
                         </table>
@@ -131,6 +126,4 @@
                     </div>
                 </div>
             </div>
-	    
-	    
 	    </div>

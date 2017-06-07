@@ -1,6 +1,6 @@
 <div class="col-sm-10 col-md-10">
 	<div class="well">
-		<h1>Productos Eliminados</h1>
+		<h1 align="center">Prendas en general</h1>
 	</div>
 	<div class="table-responsive">
         <table class="table table-bordered table-condensed">
@@ -32,12 +32,12 @@
                     <td><?php echo $row->tipo_producto;  ?></td>
                     <td><?php echo $row->imagen;  ?></td>
                     <td><?php echo $row->eliminado;  ?></td>
-                    <td><a href="<?php echo base_url("activar_producto/$row->id");?>">Activar</a></td>
+                    <td><a href="<?php echo base_url("edit_producto/$row->id");?>">Editar</a>/<a href="<?php echo base_url("borrar_producto/$row->id");?>">Eliminar</a></td>
                 </tr>
                 <?php } ?>
             </tbody>
         </table>
-	</div>
+    </div>
 </div>
 </div>
 </div>

@@ -342,6 +342,56 @@ class Producto_controller extends CI_Controller {
         redirect('productos', 'refresh');
     }
     
+    function all_uniformes(){
+        if($this->_veri_log())
+        {
+            $session_data = $this->session->userdata('logged_in');
+            $dat['usuario'] = $session_data['usuario'];
+            $tit = array('titulo' => 'Panel Administrador');
+            
+            if (!$this->producto_model->get_producto_uniformes()) {
+                redirect('productos', 'refresh');
+            }else
+            {
+                $data = array('productos' => $this->producto_model->get_producto_uniformes());
+                
+                $this->load->view('partes/head_views',$tit);
+                $this->load->view('partes/cabecera_views');
+                $this->load->view('panel_views',$dat);
+                $this->load->view('producto/all_uniformes_views',$data);
+                $this->load->view('partes/footer_views');
+            }
+        }else{
+            redirect('ingreso', 'refresh');
+        }
+    }
+    
+    function all_prendas(){
+        if($this->_veri_log())
+        {
+            $session_data = $this->session->userdata('logged_in');
+            $dat['usuario'] = $session_data['usuario'];
+            $tit = array('titulo' => 'Panel Administrador');
+            
+            if (!$this->producto_model->get_producto_prendas()) {
+                redirect('productos', 'refresh');
+            }else
+            {
+                $data = array('productos' => $this->producto_model->get_producto_prendas());
+                
+                $this->load->view('partes/head_views',$tit);
+                $this->load->view('partes/cabecera_views');
+                $this->load->view('panel_views',$dat);
+                $this->load->view('producto/all_prendas_views',$data);
+                $this->load->view('partes/footer_views');
+            }
+        }else{
+            redirect('ingreso', 'refresh');
+        }
+    }
+    
+    
+    
     function productos_eliminados(){
         if($this->_veri_log())
         {

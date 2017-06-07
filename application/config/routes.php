@@ -78,6 +78,8 @@ $route['edit_producto/(:num)']    = "producto_controller/edit_p/$1";
 $route['producto_up/(:num)']      = "producto_controller/editar_producto/$1";
 //Rutas para manejo de Productos - Lista producotos activos y eliminados//
 $route['productos']               = "producto_controller";
+$route['productos_uniformes']     = "producto_controller/all_uniformes";
+$route['productos_prendas']       = "producto_controller/all_prendas";
 $route['productos_eliminados']    = 'producto_controller/productos_eliminados';
 //Rutas para manejo de Productos - Desactivar o Activar producto//
 $route['borrar_producto/(:num)']  = "producto_controller/remove_producto/$1";
@@ -86,11 +88,11 @@ $route['activar_producto/(:num)'] = "producto_controller/active_producto/$1";
 
 
 // Rutas para manejo del carrito//
-$route['add_carrito']               = "carrito_controller/add";
-$route['vaciar_carrito']               = "carrito_controller/remove/all";
-$route['sacar_producto']               = "carrito_controller/remove";
-$route['factura']               = "carrito_controller/factura_view";
-$route['actualizar_carrito']               = "carrito_controller/update_cart";
+$route['add_carrito']         = "carrito_controller/add";
+$route['vaciar_carrito']      = "carrito_controller/remove/all";
+$route['sacar_producto']      = "carrito_controller/remove";
+$route['factura']             = "carrito_controller/factura_view";
+$route['actualizar_carrito']  = "carrito_controller/update_cart";
 
 
 
