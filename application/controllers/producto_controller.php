@@ -41,7 +41,7 @@ class Producto_controller extends CI_Controller {
     function insert_producto()
     {
 		//Validación del formulario
-		$this->form_validation->set_rules('nombre', 'Nombre', 'required');
+		$this->form_validation->set_rules('nombre_p', 'Nombre', 'required');
 		$this->form_validation->set_rules('precio', 'Precio', 'required|numeric');
 		$this->form_validation->set_rules('stock', 'Stock', 'required|numeric');
 		$this->form_validation->set_rules('stock_minimo', 'Stock_minimo', 'required|numeric');
@@ -78,8 +78,8 @@ class Producto_controller extends CI_Controller {
     
     function _image_upload()
 	{
-		  $this->load->library('upload');
- 
+        $this->load->library('upload');
+            
             //Comprueba si hay un archivo cargado
             if (!empty($_FILES['filename']['name']))
             {
@@ -102,7 +102,7 @@ class Producto_controller extends CI_Controller {
                     $url ="uploads/".$_FILES['filename']['name'];
                     // Array de datos para insertar en libros 
                     $data = array(
-						'nombre'=>$this->input->post('nombre',true),
+						'nombre'=>$this->input->post('nombre_p',true),
 						'precio'=>$this->input->post('precio',true),
 						'stock'=>$this->input->post('stock',true),
 						'stock_minimo'=>$this->input->post('stock_minimo',true),
@@ -123,7 +123,9 @@ class Producto_controller extends CI_Controller {
 				    
 					return false;
                 }
-            }else{
+            }
+            else
+            {
             	redirect('registro_producto', 'refresh');
             }
 	

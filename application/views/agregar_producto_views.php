@@ -9,14 +9,14 @@
                 <div class="form-group">
                     <?php echo form_label('Nombre del producto:', 'nombre'); ?>
                     <?php echo form_error('nombre'); ?>
-                    <?php echo form_input(['name' => 'nombre_p', 'id' => 'nombre_p', 'class' => 'form-control','placeholder' => 'Nombre del producto', 'autofocus'=>'autofocus']); ?>
+                    <?php echo form_input(['name' => 'nombre_p', 'id' => 'nombre_p', 'class' => 'form-control','placeholder' => 'Nombre del producto', 'autofocus'=>'autofocus','value'=>set_value('nombre_p')]); ?>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <?php echo form_label('Precio:', 'precio'); ?>
                     <?php echo form_error('precio'); ?>
-                    <?php echo form_input(['name' => 'precio', 'id' => 'precio', 'class' => 'form-control','placeholder' => 'Precio']); ?>
+                    <?php echo form_input(['name' => 'precio', 'id' => 'precio', 'class' => 'form-control','placeholder' => 'Precio','value'=>set_value('precio')]); ?>
                 </div>
             </div>
         </div>
@@ -25,14 +25,14 @@
                 <div class="form-group">
                     <?php echo form_label('Stock:', 'stock'); ?>
                     <?php echo form_error('stock'); ?>
-                    <?php echo form_input(['name' => 'stock', 'id' => 'stock', 'class' => 'form-control','placeholder' => 'Stock', 'autofocus'=>'autofocus']); ?>
+                    <?php echo form_input(['name' => 'stock', 'id' => 'stock', 'class' => 'form-control','placeholder' => 'Stock', 'autofocus'=>'autofocus','value'=>set_value('stock')]); ?>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <?php echo form_label('Stock Minimo:', 'stock_minimo'); ?>
                     <?php echo form_error('stock_minimo'); ?>
-                    <?php echo form_input(['type' => 'text', 'name' => 'stock_minimo', 'id' => 'stock_minimo', 'class' => 'form-control','placeholder' => 'Stock minimo']); ?>
+                    <?php echo form_input(['type' => 'text', 'name' => 'stock_minimo', 'id' => 'stock_minimo', 'class' => 'form-control','placeholder' => 'Stock minimo','value'=>set_value('stock_minimo')]); ?>
                 </div>
             </div>
         </div>
@@ -41,14 +41,14 @@
                 <div class="form-group">
                     <?php echo form_label('Talle:', 'talle'); ?>
                     <?php echo form_error('talle'); ?>
-                    <?php echo form_input(['type' => 'text', 'name' => 'talle', 'id' => 'talle', 'class' => 'form-control','placeholder' => 'Talle']); ?>
+                    <?php echo form_input(['type' => 'text', 'name' => 'talle', 'id' => 'talle', 'class' => 'form-control','placeholder' => 'Talle','value'=>set_value('talle')]); ?>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <?php echo form_label('Género:', 'genero'); ?>
                     <?php echo form_error('genero'); ?>
-                    <?php echo form_input(['name' => 'genero','id' => 'genero', 'class' => 'form-control','placeholder' => 'genero']); ?>
+                    <?php echo form_input(['name' => 'genero','id' => 'genero', 'class' => 'form-control','placeholder' => 'genero','value'=>set_value('genero')]); ?>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
                 <div class="form-group">
                     <?php echo form_label('Típo de producto:', 'tipo_producto'); ?>
                     <?php echo form_error('tipo_producto'); ?>
-                    <?php echo form_input(['name' => 'tipo_producto', 'id' => 'tipo_producto', 'class' => 'form-control','placeholder' => 'Tipo de producto']); ?>
+                    <?php echo form_input(['name' => 'tipo_producto', 'id' => 'tipo_producto', 'class' => 'form-control','placeholder' => 'Tipo de producto','value'=>set_value('tipo_producto')]); ?>
                 </div>
             </div>
             <div class="col-md-6">
