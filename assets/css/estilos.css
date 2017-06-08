@@ -1,6 +1,5 @@
 body{
-    background-image: url(base_url assets/img/fondos-de-pantalla-azul-infinito.jpg);
-    background-size: 50%;
+    background-color: darkgrey;
     font-family: serif sans-serif monospace;
     font-size: 17px;
 }
@@ -119,7 +118,6 @@ h3{
 font-family: 'Raleway', sans-serif;
 margin-top: 10px;
 margin-bottom: 10px;
-color:#FFF;
 }
 
 div#text {

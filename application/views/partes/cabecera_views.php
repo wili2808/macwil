@@ -1,6 +1,7 @@
 <div class="container">
+    <div class="row">
     <!---------------------------------------- Cabecera -------------------------------------->
-    <h1 id="cabecera">Mac - Wil</h1>
+    <img  src="<?php echo base_url("assets/img/mac-wil-titulo.png"); ?>"  class="img-responsive">
     <!---------------------------------- Barra de Navegacion -------------------------------------->
     <nav id="navbar_top" class="navbar navbar-default navbar-inverse">
         <div class="container-fluid">
@@ -85,4 +86,5 @@
             </div> <!-- /.modal-content -->
         </div> <!-- /.modal-dialog -->
     </div> <!-- /.modal -->
+    </div>
 </div>
