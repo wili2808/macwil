@@ -40,9 +40,7 @@ Class Producto_Model extends CI_Model
             return FALSE;
         }
     }
-
-
-
+    
     public function create_producto($data){
         $this->db->insert('productos', $data);
     }

@@ -42,6 +42,8 @@
 $route['default_controller'] = "home";
 
 
+//-------------------------- USUARIOS --------------------------//
+
 //Rutas para manejo de Usuarios - Ingreso y cierre de sesion//
 $route['login']                    = "usuario_controller";
 $route['login_ajax']               = "usuario_controller/valid_login_ajax";
@@ -65,6 +67,8 @@ $route['activar_usuario/(:num)']   = "usuario_controller/active_usuario/$1";
 
 
 
+//-------------------------- PRODUCTOS --------------------------//
+
 // Rutas para views de Productos y Servicios - Mostrar vistas//
 $route['uniformes']               = "home/uniformes";
 $route['prendas']                 = "home/prendas";
@@ -87,12 +91,15 @@ $route['activar_producto/(:num)'] = "producto_controller/active_producto/$1";
 
 
 
+//-------------------------- CARRITO --------------------------//
+
 // Rutas para manejo del carrito//
 $route['add_carrito']         = "carrito_controller/add";
 $route['vaciar_carrito']      = "carrito_controller/remove/all";
 $route['sacar_producto']      = "carrito_controller/remove";
 $route['factura']             = "carrito_controller/factura_view";
 $route['actualizar_carrito']  = "carrito_controller/update_cart";
+$route['compra_realizada']    = "carrito_controller/compra_realizada";
 
 
 

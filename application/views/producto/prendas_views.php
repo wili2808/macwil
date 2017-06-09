@@ -26,6 +26,7 @@
                             echo form_hidden('id', $row->id);
                             echo form_hidden('name', $row->nombre);
                             echo form_hidden('price', $row->precio);
+                            echo form_hidden('stock', $row->stock);
                             
                             $btn = array('class' => 'btn btn-primary teal','value' => 'Agregar al Carrito','name' => 'action');
                             

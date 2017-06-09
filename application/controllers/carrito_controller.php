@@ -6,6 +6,7 @@
         {
             parent::__construct();
             $this ->load->model('carrito_model');
+            $this ->load->model('producto_model');
             $this->load->library('cart');
             
         }
@@ -34,6 +35,7 @@
             'id' => $this->input->post('id'),
             'name' => $this->input->post('name'),
             'price' => $this->input->post('price'),
+            'stock' => $this->input->post('stock'),
             'qty' => 1
             );
             
@@ -72,43 +74,37 @@
             $price = $cart['price'];
             $amount = $price * $cart['qty'];
             $qty = $cart['qty'];
-
+            
             $data = array(
             'rowid' => $rowid,
             'price' => $price,
             'amount' => $amount,
             'qty' => $qty
             );
-
+            
             $this->cart->update($data);
         }
             redirect('uniformes');
         }
-
+        
         function factura_view(){
         // Cargo la vista de la Factura.
-            $this->load->view('partes/head_views');
+            $tit = array ('titulo' => 'Factura');
+            
+            $this->load->view('partes/head_views',$tit);
             $this->load->view('partes/cabecera_views');
             $this->load->view('factura_views');
             $this->load->view('partes/footer_views');
         }
-
+        
         public function save_order()
         {
             if($this->_veri_log())
             {
-                // This will store all values which inserted from user.
-        //        $customer = array(
-        //        'name' => $this->input->post('name'),
-        //        'email' => $this->input->post('email'),
-        //        'address' => $this->input->post('address'),
-        //        'phone' => $this->input->post('phone')
-        //        );
-                // And store user information in database.
                 $session_data = $this->session->userdata('logged_in');
                 $usuario_id = $session_data['id'];
-
-
+                
+                
                 $grand_total = 0;
                 // Calculate grand total.
                 if ($cart = $this->cart->contents()):
@@ -116,17 +112,17 @@
                 $grand_total = $grand_total + $item['subtotal'];
                 endforeach;
                 endif;
-
-
-
+                
+                
+                
                 $order = array(
                 'fecha' => date('Y-m-d'),
                 'usuario_id' => $usuario_id,
                 'precio_total' => $grand_total
                 );
-
+                
                 $ord_id = $this->carrito_model->insert_order($order);
-
+                
                 if ($cart = $this->cart->contents()):
                 foreach ($cart as $item):
                 $order_detail = array(
@@ -135,15 +131,27 @@
                 'cantidad' => $item['qty'],
                 'sub_total' => $item['price']
                 );
-
+                
                 // Insert product imformation with order detail, store in cart also store in database.
-
+                
                 $cust_id = $this->carrito_model->insert_order_detail($order_detail);
                 endforeach;
                 endif;
-
+                
+                //Actualizo valores de stock de productos
+                
+                if ($cart = $this->cart->contents()):
+                foreach ($cart as $item):
+                $id = $item['id'];
+                $dat = array('stock'=>($item['stock'] - $item['qty']));
+                $this->producto_model->set_producto($id, $dat);
+                endforeach;
+                endif;
+                
+                $this->cart->destroy();
+                
                 // After storing all imformation in database load "billing_success".
-                redirect ('home');
+                redirect ('compra_realizada');
             }
             else
             {
@@ -151,15 +159,14 @@
             }
         }
         
-
-
-        
-        
-        
+        function compra_realizada (){
+            $session_data = $this->session->userdata('logged_in');
+            $data['usuario'] = $session_data['usuario'];
+            
+            $this->load->view('partes/head_views');
+            $this->load->view('partes/cabecera_views');
+            $this->load->view('compra_realizada_views',$data);
+            $this->load->view('partes/footer_views');   
         }
-        ?>
-        
-        
-        
-        
     }
+?>
