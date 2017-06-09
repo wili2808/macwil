@@ -104,7 +104,7 @@ $route['compra_realizada']    = "carrito_controller/compra_realizada";
 
 
 $route['consultas'] = "consultas_controller";
-$route['comercializacion'] = "comercializacion_controller";
+$route['comercializacion'] = "home/comercializacion";
 
 $route['404_override'] = '';
 

@@ -3,10 +3,7 @@
     {
         function validar_usuario($username, $password)
         {
-            $this->db->where('usuario', $username);
-            $this->db->where('pass', $password);
-            
-            $query = $this->db->get('usuarios');
+            $query = $this->db->get_where('usuarios', array('usuario'=>$username,'pass'=>base64_encode($password)), 1);
             
             if($query->num_rows() == 1)
             {
@@ -62,7 +59,7 @@
         }
 		
         function valid_user_ajax($usuario, $pass){
-            $query = $this->db->get_where('usuarios', array('usuario'=>$usuario,'pass'=>$pass));
+            $query = $this->db->get_where('usuarios', array('usuario'=>$usuario,'pass'=>base64_encode($pass)));
 
             if($query->num_rows() >0){
                 return $query->row();
@@ -92,7 +89,7 @@
             }
         }
         
-        function get_tipos()
+        function get_tipo()
         {
             $query = $this->db->get("tipo_usuario");
             //si hay resultados

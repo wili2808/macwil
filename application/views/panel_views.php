@@ -5,7 +5,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePerfil"><span class="glyphicon glyphicon-user">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsePerfil"><span class="icon-user-check"></span>
                         </span> Perfil de <b><?php echo $usuario; ?></b></a>
                     </h4>
                 </div>
@@ -30,7 +30,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseUsuarios"><span class="glyphicon glyphicon-list">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseUsuarios"><span class="icon-users"></span>
                         </span> Usuarios </a>
                     </h4>
                 </div>
@@ -60,7 +60,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseProductos"><span class="glyphicon glyphicon-folder-open">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseProductos"><span class="icon-price-tags"></span>
                         </span> Productos </a>
                     </h4>
                 </div>
@@ -100,7 +100,7 @@
 	        <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseVentas"><span class="glyphicon glyphicon-folder-open">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseVentas"><span class="icon-cart"></span>
                         </span> Ventas </a>
                     </h4>
                 </div>

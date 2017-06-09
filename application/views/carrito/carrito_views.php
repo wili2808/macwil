@@ -81,8 +81,7 @@
                     <td>
                         <?php
                         // cancle image.
-                        $path = ("<img src= '<?php echo base_url(assets/img/cart_cross.jpg);?>' width='25px' height='20px'>");
-                        echo anchor('carrito_controller/remove/' . $item['rowid'], $path); ?>
+                        echo anchor('carrito_controller/remove/' . $item['rowid'], ' Eliminar', array('class' => 'btn btn-danger glyphicon glyphicon-shopping-cart'));?>
                     </td>
                     <?php endforeach; ?>
                 </tr>

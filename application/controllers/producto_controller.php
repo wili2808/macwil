@@ -21,13 +21,25 @@ class Producto_controller extends CI_Controller {
     	}
     }
     
+    private function _veri_adm()
+    {
+        if ($this->session->userdata('logged_in') and ($this->session->userdata('tipo_usuario') == '1'))
+        {
+            return TRUE;
+        } 
+        else
+        {
+            return FALSE;
+        }
+    }
+    
     /**
     * Función principal del controlador ejecuta por defecto si no nombramos el metodo.
     *@access  public
     */
 	public function index()
 	{
-		if($this->_veri_log())
+		if($this->_veri_adm())
         {
         	$session_data = $this->session->userdata('logged_in');
             $tit = array ('titulo' => 'Panel Administrador');
@@ -41,13 +53,18 @@ class Producto_controller extends CI_Controller {
             $this->load->view('producto/all_productos_views',$dato);
             $this->load->view('partes/footer_views');
 		}else{
-            redirect('login', 'refresh');
+            $data = array('titulo' => 'Acceso');
+            $this->load->view('partes/head_views',$data);
+            $this->load->view('partes/cabecera_views');
+            $this->load->view('aviso_administrador_views');
+            $this->load->view('login_views');
+            $this->load->view('partes/footer_views');
         }
 	}
 
     function insert_view()
     {
-        if($this->_veri_log())
+        if($this->_veri_adm())
         {
             $session_data = $this->session->userdata('logged_in');
             $tit = array ('titulo' => 'Panel Administrador');
@@ -60,7 +77,12 @@ class Producto_controller extends CI_Controller {
             $this->load->view('producto/agregar_producto_views',$tipo);
             $this->load->view('partes/footer_views');
         }else{
-            redirect('ingreso', 'refresh');
+            $data = array('titulo' => 'Acceso');
+            $this->load->view('partes/head_views',$data);
+            $this->load->view('partes/cabecera_views');
+            $this->load->view('aviso_administrador_views');
+            $this->load->view('login_views');
+            $this->load->view('partes/footer_views');
         }
     }
     
@@ -85,7 +107,7 @@ class Producto_controller extends CI_Controller {
         
         if (!$this->form_validation->run())
         {
-            if($this->_veri_log())
+            if($this->_veri_adm())
             {
                 $session_data = $this->session->userdata('logged_in');
                 $tit = array ('titulo' => 'Panel Administrador');
@@ -100,7 +122,12 @@ class Producto_controller extends CI_Controller {
             }
             else
             {
-                redirect( 'login','refresh');
+                $data = array('titulo' => 'Acceso');
+                $this->load->view('partes/head_views',$data);
+                $this->load->view('partes/cabecera_views');
+                $this->load->view('aviso_administrador_views');
+                $this->load->view('login_views');
+                $this->load->view('partes/footer_views');
             }
         }
         else
@@ -165,7 +192,7 @@ class Producto_controller extends CI_Controller {
 
    
 
-    function edit_p()   //en progreso
+    function edit_p()
     {
         $id = $this->uri->segment(2);
         
@@ -194,7 +221,7 @@ class Producto_controller extends CI_Controller {
         }else{
             return FALSE;
         }
-        if($this->_veri_log())
+        if($this->_veri_adm())
         {
             $session_data = $this->session->userdata('logged_in');
             $tit = array ('titulo' => 'Panel Administrador');
@@ -208,7 +235,12 @@ class Producto_controller extends CI_Controller {
             $this->load->view('partes/footer_views');
         }
         else{
-            redirect('login', 'refresh');
+            $data = array('titulo' => 'Acceso');
+            $this->load->view('partes/head_views',$data);
+            $this->load->view('partes/cabecera_views');
+            $this->load->view('aviso_administrador_views');
+            $this->load->view('login_views');
+            $this->load->view('partes/footer_views');
         }
     }
       
@@ -245,7 +277,7 @@ class Producto_controller extends CI_Controller {
                     );
         if ($this->form_validation->run()==FALSE)
         {
-            if($this->_veri_log())
+            if($this->_veri_adm())
             {
                 $session_data = $this->session->userdata('logged_in');
                 $tit = array ('titulo' => 'Panel Administrador');
@@ -258,7 +290,12 @@ class Producto_controller extends CI_Controller {
                 $this->load->view('producto/edit_producto_views', array_merge($tipo,$data));
                 $this->load->view('partes/footer_views');
             }else{
-                redirect('login', 'refresh');
+                $data = array('titulo' => 'Acceso');
+                $this->load->view('partes/head_views',$data);
+                $this->load->view('partes/cabecera_views');
+                $this->load->view('aviso_administrador_views');
+                $this->load->view('login_views');
+                $this->load->view('partes/footer_views');
             }
         }
         else
@@ -343,7 +380,7 @@ class Producto_controller extends CI_Controller {
     }
     
     function all_uniformes(){
-        if($this->_veri_log())
+        if($this->_veri_adm())
         {
             $session_data = $this->session->userdata('logged_in');
             $dat['usuario'] = $session_data['usuario'];
@@ -362,12 +399,17 @@ class Producto_controller extends CI_Controller {
                 $this->load->view('partes/footer_views');
             }
         }else{
-            redirect('ingreso', 'refresh');
+            $data = array('titulo' => 'Acceso');
+            $this->load->view('partes/head_views',$data);
+            $this->load->view('partes/cabecera_views');
+            $this->load->view('aviso_administrador_views');
+            $this->load->view('login_views');
+            $this->load->view('partes/footer_views');
         }
     }
     
     function all_prendas(){
-        if($this->_veri_log())
+        if($this->_veri_adm())
         {
             $session_data = $this->session->userdata('logged_in');
             $dat['usuario'] = $session_data['usuario'];
@@ -386,14 +428,19 @@ class Producto_controller extends CI_Controller {
                 $this->load->view('partes/footer_views');
             }
         }else{
-            redirect('ingreso', 'refresh');
+            $data = array('titulo' => 'Acceso');
+            $this->load->view('partes/head_views',$data);
+            $this->load->view('partes/cabecera_views');
+            $this->load->view('aviso_administrador_views');
+            $this->load->view('login_views');
+            $this->load->view('partes/footer_views');
         }
     }
     
     
     
     function productos_eliminados(){
-        if($this->_veri_log())
+        if($this->_veri_adm())
         {
             $session_data = $this->session->userdata('logged_in');
             $dat['usuario'] = $session_data['usuario'];
@@ -412,7 +459,12 @@ class Producto_controller extends CI_Controller {
                 $this->load->view('partes/footer_views');
             }
         }else{
-            redirect('ingreso', 'refresh');
+            $data = array('titulo' => 'Acceso');
+            $this->load->view('partes/head_views',$data);
+            $this->load->view('partes/cabecera_views');
+            $this->load->view('aviso_administrador_views');
+            $this->load->view('login_views');
+            $this->load->view('partes/footer_views');
         }
     }
     

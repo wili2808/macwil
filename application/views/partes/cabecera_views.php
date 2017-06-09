@@ -14,7 +14,6 @@
                     <span class="icon-bar"></span>
                 </button>     
                 <a href="<?php echo base_url();?>" class="navbar-brand">MAC-WIL</a>
-                <a href="<?php echo base_url('login');?>" class="btn btn-link navbar-toggle collapsed">Ingresá/Registrate</a>
             </div>  
             <div class="collapse navbar-collapse" id="navbar-1">
                 <ul class="nav navbar-nav">
@@ -39,15 +38,26 @@
                             <a class="btn btn-default" role="button" data-toggle="modal" data-target=".forget-modal">Iniciar sesión</a>
                         </li>
                     <?php }else{?>
-                        <li class="dropdown" id="sesion">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido 
-                            <?= $this->session->userdata('usuario')?><b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="#"><a type="button" href="<?php echo base_url('panel') ?>" role="button">Panel</a></li>
-                                <li class="#"><a type="button" href="<?php echo base_url('logout_ajax') ?>" role="button">Cerrar Sesión</a></li>
-                            </ul>
-                        </li>
+                        <?php if($this->session->userdata('tipo_usuario') == '1'){ ?>
+                                <li class="dropdown" id="sesion">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido 
+                                    <?= $this->session->userdata('usuario')?><b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="#"><a type="button" href="<?php echo base_url('panel') ?>" role="button">Panel</a></li>
+                                        <li class="#"><a type="button" href="<?php echo base_url('logout_ajax') ?>" role="button">Cerrar Sesión</a></li>
+                                    </ul>
+                                </li>
+                        <?php }else{?>
+                                <li class="dropdown" id="sesion">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bienvenido 
+                                    <?= $this->session->userdata('usuario')?><b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="#"><a type="button" href="<?php echo base_url('logout_ajax') ?>" role="button">Cerrar Sesión</a></li>
+                                    </ul>
+                                </li>
+                        <?php } ?>  
                     <?php } ?>
                 </ul>
             </div>

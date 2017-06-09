@@ -8,16 +8,6 @@
             $this ->load->model('usuario_model');
         }
         
-        //funcion que se ejecuta por defecto ----> Carga las vistas correspondientes al formulario de LOGIN...
-        function index()
-		{
-            $data = array('titulo' => 'Acceso');
-            $this->load->view('partes/head_views',$data);
-            $this->load->view('partes/cabecera_views');
-            $this->load->view('login_views');
-            $this->load->view('partes/footer_views');
-        }
-        
         //Funcion que verifica si existe usuario logeado...
         private function _veri_log()
         {
@@ -30,7 +20,34 @@
                 return FALSE;
             }
         }
-    	
+        
+        private function _veri_adm()
+        {
+            if ($this->session->userdata('logged_in') and ($this->session->userdata('tipo_usuario') == '1'))
+            {
+                return TRUE;
+            } 
+            else
+            {
+                return FALSE;
+            }
+        }
+        
+        //funcion que se ejecuta por defecto ----> Carga las vistas correspondientes al formulario de LOGIN...
+        function index(){
+            if($this->_veri_log())
+            {
+                redirect ('home');
+            }
+            else{
+                $data = array('titulo' => 'Acceso');
+                $this->load->view('partes/head_views',$data);
+                $this->load->view('partes/cabecera_views');
+                $this->load->view('login_views');
+                $this->load->view('partes/footer_views');
+            }
+        }
+        
         //Función que verifica los datos cargados en el Login...
         function verifico_login()
         {
@@ -53,8 +70,14 @@
 			}
 			else
             {
-                //redirigimos a la página de perfil
-				redirect('panel','refresh');
+                if($this->_veri_adm())
+                {
+                    //redirigimos a la página de perfil
+				    redirect('panel','refresh');
+                }else{
+                    //redirigimos a la página principal
+				    redirect('home','refresh');
+                }
             }
         }
         
@@ -73,12 +96,13 @@
                     $sess_array = array(
                         'id' => $row->id,
                         'usuario' => $row->usuario,
-                        'nombre' => $row->nombre
+                        'nombre' => $row->nombre,
+                        'tipo_usuario' => $row->tipo_usuario,
                     );
                     $this->session->set_userdata('logged_in', $sess_array);
                 }
                 
-                $data=["login_ajax"=> TRUE,"nombre"=>$row->nombre,"usuario"=> $row->usuario];
+                $data=["login_ajax"=> TRUE,"nombre"=>$row->nombre,"usuario"=> $row->usuario,'tipo_usuario' => $row->tipo_usuario];
                 $this->session->set_userdata($data);
             }
             else
@@ -99,7 +123,7 @@
         {
             $session_data = $this->session->userdata('logged_in');
             $dat['usuario'] = $session_data['usuario'];
-            $dato['tipo_usuario'] = $this->usuario_model->get_tipos(); 
+            $dato['tipo_usuario'] = $this->usuario_model->get_tipo(); 
             $tit = array('titulo' => 'Panel Administrador');
             $this->load->multiple_views(['partes/head_views','partes/cabecera_views','panel_views','usuario/registro_panel_views','partes/footer_views'],array_merge ($dat,$tit,$dato));
         }
@@ -137,7 +161,7 @@
 				'nombre'=>$this->input->post('nombre',true),
 				'apellido'=>$this->input->post('apellido',true),
 				'usuario'=>$this->input->post('usuario',true),
-				'pass'=>($pass),
+				'pass'=>base64_encode($pass),
                 'tel'=>$this->input->post('telefono',true),
                 'email'=>$this->input->post('email',true)
                 );
@@ -203,23 +227,37 @@
         
         public function all()
         {
-            if($this->_veri_log())
+            if($this->_veri_adm())
             {
                 $session_data = $this->session->userdata('logged_in');
                 $dat['usuario'] = $session_data['usuario'];
                 $tit = array('titulo' => 'Panel Administrador');
-                $data = array(
-                    'usuarios' => $this->usuario_model->get_usuarios()
-                );
-                $this->load->view('partes/head_views',$tit);
-                $this->load->view('partes/cabecera_views');
-                $this->load->view('panel_views',$dat);
-                $this->load->view('usuario/all_usuarios_views', array_merge($dat, $data));
-                $this->load->view('partes/footer_views');
+                $data = array('usuarios' => $this->usuario_model->get_usuarios());
+                if ($this->usuario_model->get_usuarios() == FALSE)
+                {
+                    $this->load->view('partes/head_views',$tit);
+                    $this->load->view('partes/cabecera_views');
+                    $this->load->view('panel_views',$dat);
+                    $this->load->view('usuario/no_usuarios_activos_views');
+                    $this->load->view('partes/footer_views');
+                }
+                else
+                {
+                    $this->load->view('partes/head_views',$tit);
+                    $this->load->view('partes/cabecera_views');
+                    $this->load->view('panel_views',$dat);
+                    $this->load->view('usuario/all_usuarios_views', array_merge($dat, $data));
+                    $this->load->view('partes/footer_views');
+                }
             }
             else
             {
-               redirect('login', 'refresh');
+                $data = array('titulo' => 'Acceso');
+                $this->load->view('partes/head_views',$data);
+                $this->load->view('partes/cabecera_views');
+                $this->load->view('aviso_administrador_views');
+                $this->load->view('login_views');
+                $this->load->view('partes/footer_views');
             }
         }
         
@@ -236,7 +274,7 @@
                     $telefono = $row->tel;
                     $usuario = $row->usuario;
                     $email = $row->email;
-                    $pass = $row->pass;
+                    $pass = base64_decode($row->pass);
                 }
                 $data = array('user' =>$datos_usuario,
                               'id'=>$id,
@@ -251,15 +289,19 @@
             else
             {
                 return FALSE;
-            }	
-            if($this->_veri_log())
+            }
+            
+            if($this->_veri_adm())
             {
                 $session_data = $this->session->userdata('logged_in');
-                $dat['usuario'] = $session_data['usuario'];  
-                $this->load->view('partes/head_views',$dat);
+                $dat['usuario'] = $session_data['usuario'];
+                $tit = array('titulo' => 'Panel Administrador');
+                $tipo['tipo_usuario'] = $this->usuario_model->get_tipo();
+                
+                $this->load->view('partes/head_views',$tit);
                 $this->load->view('partes/cabecera_views');
-                $this->load->view('panel_views');
-                $this->load->view('usuario/edit_usuario_views',$data);
+                $this->load->view('panel_views',$dat);
+                $this->load->view('usuario/edit_usuario_views', array_merge($tipo,$data));
                 $this->load->view('partes/footer_views');
             }
         }
@@ -273,6 +315,7 @@
             $this->form_validation->set_rules('email', 'Usuario', 'required');
             $this->form_validation->set_rules('usuario', 'Usuario', 'required');
             $this->form_validation->set_rules('pass', 'Password', 'required');
+            $this->form_validation->set_rules('tipo_usuario', 'Tipo_usuario', 'required');
 
             //Mensaje del form_validation
             $this->form_validation->set_message('required','<div class="alert alert-danger">El campo %s es obligatorio</div>');    
@@ -286,7 +329,8 @@
                 'apellido'=>$this->input->post('apellido',true),
                 'tel'=>$this->input->post('telefono',true),
                 'email'=>$this->input->post('email',true),
-                'usuario'=>$this->input->post('usuario',true)
+                'usuario'=>$this->input->post('usuario',true),
+                'tipo_usuario'=>$this->input->post('tipo_usuario',true)
                 );
 
             if ($this->form_validation->run() == FALSE)
@@ -301,7 +345,7 @@
             else
             {
                 //Si la validación del formulario es correcta la clave la encripta
-                $data['pass']= $pass;
+                $data['pass']= base64_encode($pass);
 
                 $this->usuario_model->set_socio($id, $data);
                 redirect('lista_usuarios', 'refresh');
@@ -312,7 +356,6 @@
         {
         //verificamos si la petición es via ajax
             if($this->input->is_ajax_request()){
-
                 if($this->input->post('usuario')!==''){
                     $usuario = $this->input->post('usuario');
                     $pass = $this->input->post('pass'); 
@@ -322,6 +365,7 @@
                             "id"=> $result->id,
                             "nombre"=> $result->nombre,
                             "usuario"=> $result->usuario,
+                            "tipo_usuario"=> $result->tipo_usuario,
                             "login_ajax"=> TRUE
                         ];
                         $this->session->set_userdata($data);
@@ -330,7 +374,6 @@
                         'id' => $result->id,
                         'usuario' => $result->usuario);
                         $this->session->set_userdata('logged_in', $sess_array);
-                        
                     } else {
                         echo 'error';
                     }
@@ -351,7 +394,7 @@
         }
         
         function usuarios_eliminados(){
-            if($this->_veri_log())
+            if($this->_veri_adm())
             {
                 $session_data = $this->session->userdata('logged_in');
                 $dat['usuario'] = $session_data['usuario'];
@@ -373,7 +416,12 @@
             }
             else
             {
-               redirect('login', 'refresh');
+                $data = array('titulo' => 'Acceso');
+                $this->load->view('partes/head_views',$data);
+                $this->load->view('partes/cabecera_views');
+                $this->load->view('aviso_administrador_views');
+                $this->load->view('login_views');
+                $this->load->view('partes/footer_views');
             }
         }
         

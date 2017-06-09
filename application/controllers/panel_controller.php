@@ -27,7 +27,7 @@ class Panel_controller extends CI_Controller {
     */
     function index()
     {
-        if($this->session->userdata('logged_in'))
+        if($this->session->userdata('logged_in') and ($this->session->userdata('tipo_usuario') == '1'))
         {
             $session_data = $this->session->userdata('logged_in');
             $data['usuario'] = $session_data['usuario'];
@@ -40,7 +40,12 @@ class Panel_controller extends CI_Controller {
         }
         else
         {
-            redirect('panel', 'refresh');
+            $data = array('titulo' => 'Acceso');
+            $this->load->view('partes/head_views',$data);
+            $this->load->view('partes/cabecera_views');
+            $this->load->view('aviso_administrador_views');
+            $this->load->view('login_views');
+            $this->load->view('partes/footer_views');
         }
     }
     /**

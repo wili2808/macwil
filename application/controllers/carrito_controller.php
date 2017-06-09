@@ -93,7 +93,7 @@
             
             $this->load->view('partes/head_views',$tit);
             $this->load->view('partes/cabecera_views');
-            $this->load->view('factura_views');
+            $this->load->view('carrito/factura_views');
             $this->load->view('partes/footer_views');
         }
         
@@ -165,7 +165,7 @@
             
             $this->load->view('partes/head_views');
             $this->load->view('partes/cabecera_views');
-            $this->load->view('compra_realizada_views',$data);
+            $this->load->view('carrito/compra_realizada_views',$data);
             $this->load->view('partes/footer_views');   
         }
     }

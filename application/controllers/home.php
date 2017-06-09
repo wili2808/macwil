@@ -44,7 +44,7 @@ class Home extends CI_Controller {
         
 		$this->load->view('partes/head_views',$data);
         $this->load->view('partes/cabecera_views');
-        $this->load->view('carrito_views');
+        $this->load->view('carrito/carrito_views');
         $this->load->view('producto/uniformes_views',$dato);
         $this->load->view('partes/footer_views');
 	}
@@ -55,7 +55,7 @@ class Home extends CI_Controller {
         
 		$this->load->view('partes/head_views',$data);
         $this->load->view('partes/cabecera_views');
-        $this->load->view('carrito_views');
+        $this->load->view('carrito/carrito_views');
         $this->load->view('producto/prendas_views',$dato);
         $this->load->view('partes/footer_views');
 	}
@@ -83,19 +83,27 @@ class Home extends CI_Controller {
     //Fin de funciones de carga de vistas de productos y servicios...
     
     function login()
-        {
-            $data = array('titulo' => 'Acceso');
-            $this->load->view('partes/head_views',$data);
-            $this->load->view('partes/cabecera_views');
-            $this->load->view('login_views');
-            $this->load->view('partes/footer_views');
-        }
+    {
+        $data = array('titulo' => 'Acceso');
+        $this->load->view('partes/head_views',$data);
+        $this->load->view('partes/cabecera_views');
+        $this->load->view('login_views');
+        $this->load->view('partes/footer_views');
+    }
     
     public function registro()
-        {
-            $data = array('titulo' => 'Registro');
-            $this->load->multiple_views(['partes/head_views','partes/cabecera_views','registro_views','partes/footer_views'],$data);
-        }
+    {
+        $data = array('titulo' => 'Registro');
+        $this->load->multiple_views(['partes/head_views','partes/cabecera_views','registro_views','partes/footer_views'],$data);
+    }
+    
+    public function comercializacion(){
+        $data = array('titulo' => 'Acceso');
+        $this->load->view('partes/head_views',$data);
+        $this->load->view('partes/cabecera_views');
+        $this->load->view('comercializacion_views');
+        $this->load->view('partes/footer_views');
+    }
 }
 
 /* End of file welcome.php */
