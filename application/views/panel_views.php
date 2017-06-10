@@ -14,7 +14,7 @@
                         <table class="table">
                             <tr>
                                 <td>
-                                    <a href="#">Mis Datos</a>
+                                    <a href="mis_datos">Mis Datos</a>
                                 </td>
                             </tr>
                             <tr>
@@ -100,8 +100,8 @@
 	        <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseVentas"><span class="icon-cart"></span>
-                        </span> Ventas </a>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseVentas"><span class="icon-folder-open"></span>
+                        </span> Consultas </a>
                     </h4>
                 </div>
                 <div id="collapseVentas" class="panel-collapse collapse">
@@ -109,12 +109,12 @@
                         <table class="table">
                             <tr>
                                 <td>
-                                    <a href="<?php echo base_url();?>">..</a>
+                                    <a href="<?php echo base_url('all_consultas');?>">Todas</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="<?php echo base_url(); ?>">...</a>
+                                    <a href="<?php echo base_url(''); ?>">...</a>
                                 </td>
                             </tr>
                             <tr>

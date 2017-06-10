@@ -102,8 +102,22 @@ $route['actualizar_carrito']  = "carrito_controller/update_cart";
 $route['compra_realizada']    = "carrito_controller/compra_realizada";
 
 
+//-------------------------- CONSULTA --------------------------//
 
-$route['consultas'] = "consultas_controller";
+$route['consultas']         = "consultas_controller";
+$route['registro_consulta'] = "consultas_controller/insert_consulta";
+$route['consulta_enviada']  = "consultas_controller/consulta_enviada";
+$route['all_consultas']     = "consultas_controller/all_consultas";
+
+$route['ver_consulta/(:num)']    = "consultas_controller/ver_consulta/$1";
+$route['borrar_consulta/(:num)']  = "consultas_controller/remove_consulta/$1";
+
+
+
+
+
+$route['mis_datos'] = "usuario_controller/ver_datos_perfil";
+
 $route['comercializacion'] = "home/comercializacion";
 
 $route['404_override'] = '';

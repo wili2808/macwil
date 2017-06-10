@@ -435,6 +435,57 @@
             redirect('lista_usuarios', 'refresh');
         }
         
+        function ver_datos_perfil()
+        {
+            if($this->_veri_log())
+            {
+
+                $id = $this->session->userdata('id');
+                
+                $datos_perfil = $this->usuario_model->update_socios($id);
+                if ($datos_perfil != FALSE)
+                {
+                    foreach ($datos_perfil->result() as $row) {
+                        $nombre= $row->nombre;
+                        $apellido = $row->apellido;
+                        $usuario = $row->usuario;
+                        $pass = $row->pass;
+                        $tel = $row->tel;
+                        $email = $row->email;
+                        $tipo_usuario = $row->tipo_usuario;
+                    }
+                    $data = array('nombre' =>$nombre,
+                                  'id'=>$id,
+                                  'apellido'=>$apellido,
+                                  'email' =>$email,
+                                  'tel'=>$tel,
+                                  'usuario'=>$usuario,
+                                  'tipo_usuario'=>$tipo_usuario,
+                                  'pass'=>base64_encode($pass)
+                            );
+                }else{
+                    return FALSE;
+                }
+                $session_data = $this->session->userdata('logged_in');
+                $tit = array ('titulo' => 'Panel Administrador');
+                $dato['usuario'] = $session_data['usuario'];
+                
+                $this->load->view('partes/head_views',$tit);
+                $this->load->view('partes/cabecera_views');
+                $this->load->view('panel_views',$dato);
+                $this->load->view('usuario/datos_perfil_views',$data);
+                $this->load->view('partes/footer_views');
+                
+            }
+            else
+            {
+                redirect('login');
+            }
+        }
+        
+        
+        
+        
         
         //Cierra sesión de ajax
         function logout_ajax()

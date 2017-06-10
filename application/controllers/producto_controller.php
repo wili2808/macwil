@@ -172,7 +172,7 @@ class Producto_controller extends CI_Controller {
                     'tipo_producto'=>$this->input->post('tipo_producto',true),
                     'imagen'=>$url
                 );
-                $datos_libros = $this->producto_model->create_producto($data);
+                $datos_producto = $this->producto_model->create_producto($data);
                 redirect('productos','refresh');
                 return TRUE;
             }
